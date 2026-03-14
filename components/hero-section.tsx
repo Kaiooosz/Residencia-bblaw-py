@@ -12,37 +12,50 @@ export function HeroSection() {
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* ── Background: gradiente bandeira do Paraguai ── */}
+      {/* ── Background: GIF animado + overlay escuro ── */}
       <div className="absolute inset-0 z-0">
+        {/* GIF de fundo */}
+        <img
+          src="/hero-bg.gif"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+
+        {/* Tela escura principal — deixa o GIF bem escuro */}
+        <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.72)" }} />
+
+        {/* Gradiente bandeira do Paraguai em cima do overlay */}
         <div
           className="absolute inset-0"
           style={{
             background: `linear-gradient(
               to bottom,
-              #3a0503 0%,
-              #0e0101 7%,
-              #000000 18%,
-              #000000 50%,
-              #000000 82%,
-              #010614 93%,
-              #001050 100%
+              rgba(58,5,3,0.55) 0%,
+              rgba(0,0,0,0.35) 15%,
+              rgba(0,0,0,0.10) 40%,
+              rgba(0,0,0,0.10) 60%,
+              rgba(0,0,0,0.35) 85%,
+              rgba(0,8,50,0.60) 100%
             )`,
           }}
         />
-        {/* Ambient glow */}
+
+        {/* Ambient glow sutil */}
         <div
           className="absolute inset-0"
           style={{
             background: `
-              radial-gradient(ellipse 90% 40% at 50% 0%, rgba(213,43,30,0.18) 0%, transparent 65%),
-              radial-gradient(ellipse 90% 40% at 50% 100%, rgba(0,56,168,0.20) 0%, transparent 65%)
+              radial-gradient(ellipse 80% 35% at 50% 0%, rgba(213,43,30,0.14) 0%, transparent 65%),
+              radial-gradient(ellipse 80% 35% at 50% 100%, rgba(0,56,168,0.16) 0%, transparent 65%)
             `,
           }}
         />
-        {/* Fade suave para preto na base */}
+
+        {/* Fade para preto na base */}
         <div
           className="absolute bottom-0 left-0 right-0"
-          style={{ height: "30%", background: "linear-gradient(to bottom, transparent, #000)" }}
+          style={{ height: "28%", background: "linear-gradient(to bottom, transparent, rgba(0,0,0,0.95))" }}
         />
       </div>
 
