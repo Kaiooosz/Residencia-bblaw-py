@@ -1,128 +1,158 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ArrowRight, Shield, Globe, CheckCircle2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { ArrowRight } from "lucide-react"
 
-const badges = [
-  { icon: Shield, label: "Segurança Jurídica" },
-  { icon: Globe, label: "Equipe Bilíngue" },
-  { icon: CheckCircle2, label: "100% Legal" },
-]
+const WA_LINK =
+  "https://wa.me/5511982712025?text=Gostaria%20de%20agendar%20uma%20consultoria%20para%20tirar%20minha%20cidadania%20do%20paraguai."
 
 export function HeroSection() {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background */}
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
+      {/* ── Background: gradiente bandeira do Paraguai ── */}
       <div className="absolute inset-0 z-0">
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0"
           style={{
-            backgroundImage: `url('/modern-city-skyline-panoramic-view-asuncion-paragu.jpg')`,
+            background: `linear-gradient(
+              to bottom,
+              #3a0503 0%,
+              #0e0101 7%,
+              #000000 18%,
+              #000000 50%,
+              #000000 82%,
+              #010614 93%,
+              #001050 100%
+            )`,
           }}
         />
-        <div className="absolute inset-0 bg-linear-to-b from-background/95 via-background/80 to-background" />
+        {/* Ambient glow */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `
+              radial-gradient(ellipse 90% 40% at 50% 0%, rgba(213,43,30,0.18) 0%, transparent 65%),
+              radial-gradient(ellipse 90% 40% at 50% 100%, rgba(0,56,168,0.20) 0%, transparent 65%)
+            `,
+          }}
+        />
+        {/* Fade suave para preto na base */}
+        <div
+          className="absolute bottom-0 left-0 right-0"
+          style={{ height: "30%", background: "linear-gradient(to bottom, transparent, #000)" }}
+        />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      {/* ── Logo centralizado ── */}
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
+        className="absolute z-20"
+        style={{ top: "6rem" }}
+      >
+        <img src="/LogoBranco.svg" alt="BBLaw" className="h-9 w-auto object-contain opacity-80" />
+      </motion.div>
+
+      {/* ── Main content ── */}
+      <div
+        className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-24"
+        style={{ paddingTop: "10rem" }}
+      >
         <div className="text-center max-w-4xl mx-auto">
-          {/* Badge */}
+
+          {/* Eyebrow */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 bg-secondary rounded-full px-4 py-2 mb-8"
+            transition={{ duration: 0.7 }}
+            className="inline-flex items-center gap-4 mb-12"
           >
-            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-            <span className="text-sm font-medium text-titanium">
-              BBLaw — Especialistas em cidadania e negócios internacionais
-            </span>
+            <span className="block h-px w-10" style={{ background: "linear-gradient(90deg,transparent,rgba(213,43,30,0.6))" }} />
+            <span className="eyebrow">Assessoria Internacional</span>
+            <span className="block h-px w-10" style={{ background: "linear-gradient(90deg,rgba(0,56,168,0.6),transparent)" }} />
           </motion.div>
 
-          {/* Headline */}
+          {/* ── Headline — efeito Kast na h1 inteira ── */}
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-serif font-semibold text-foreground leading-tight tracking-tight text-balance"
+            transition={{ duration: 0.85, delay: 0.1, ease: "easeOut" }}
+            className="heading-kast text-balance"
+            style={{ fontSize: "clamp(3.2rem, 7.5vw, 6.5rem)" }}
           >
-            Tire Sua Cidadania Paraguaia com <span className="text-graphite">Segurança</span> e Acompanhamento Jurídico
-            Completo
+            Conquiste sua
+            <br />
+            Cidadania Paraguaia
+            <br />
+            com{" "}
+            <em style={{ fontStyle: "italic" }}>Segurança</em>
           </motion.h1>
 
           {/* Subheadline */}
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed text-pretty"
+            transition={{ duration: 0.8, delay: 0.22 }}
+            className="mt-10 text-sm font-light text-white/70 max-w-md mx-auto leading-[2] tracking-wide"
           >
-            Sua liberdade internacional começa aqui. A BBLaw cuida de todo o processo — documentos, protocolos oficiais,
-            viagem, residência e cidadania.
+            Oferecemos assessoria completa para brasileiros que desejam resolver documentos,
+            abrir empresas, validar diplomas ou conquistar a cidadania paraguaia.
           </motion.p>
 
           {/* CTA Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+            transition={{ duration: 0.8, delay: 0.34 }}
+            className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Button
-              asChild
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 py-6 text-lg font-medium group"
-            >
-              <a href="#contato">
-                Quero iniciar meu processo
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            {/* Botão principal — preto com borda rotativa PY */}
+            <div className="btn-py-ring">
+              <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="btn-py-inner">
+                Iniciar meu processo
+                <ArrowRight className="w-3.5 h-3.5" />
               </a>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="rounded-full px-8 py-6 text-lg font-medium border-border hover:bg-secondary bg-transparent"
+            </div>
+
+            <a
+              href="#processo"
+              className="inline-flex items-center border border-white/10 text-white/55 text-sm font-light tracking-wide px-9 py-4 rounded-full hover:border-white/22 hover:text-white/55 transition-all duration-300"
             >
-              <a href="#processo">Ver como funciona</a>
-            </Button>
+              Como funciona
+            </a>
           </motion.div>
 
-          {/* Trust Badges */}
+          {/* Flag accent lines */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-16 flex flex-wrap items-center justify-center gap-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.9 }}
+            className="mt-16 flex items-center justify-center gap-2"
           >
-            {badges.map((badge, index) => (
-              <div key={index} className="flex items-center gap-2 text-muted-foreground">
-                <badge.icon className="w-5 h-5 text-graphite" />
-                <span className="text-sm font-medium">{badge.label}</span>
-              </div>
-            ))}
+            <span className="w-5 h-px rounded-full" style={{ backgroundColor: "#D52B1E", opacity: 0.4 }} />
+            <span className="w-5 h-px rounded-full" style={{ backgroundColor: "rgba(255,255,255,0.22)" }} />
+            <span className="w-5 h-px rounded-full" style={{ backgroundColor: "#0038A8", opacity: 0.4 }} />
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        transition={{ delay: 1.5, duration: 0.6 }}
+        className="absolute bottom-9 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
+        <span className="text-[9px] tracking-[0.35em] uppercase text-white/14 font-light">Scroll</span>
         <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2 }}
-          className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex justify-center"
-        >
-          <motion.div
-            animate={{ y: [0, 16, 0] }}
-            transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2 }}
-            className="w-1.5 h-3 bg-muted-foreground/50 rounded-full mt-2"
-          />
-        </motion.div>
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 2.8, ease: "easeInOut" }}
+          className="w-px h-8 bg-gradient-to-b from-white/16 to-transparent"
+        />
       </motion.div>
     </section>
   )

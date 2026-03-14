@@ -2,38 +2,67 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { FileText, Users, Scale, Plane, MessageSquare, CheckCircle2 } from "lucide-react"
+import { Flag, CreditCard, Building2, GraduationCap, ArrowRight } from "lucide-react"
 
-const solutions = [
+const services = [
   {
-    icon: FileText,
-    title: "Assessoria Completa",
-    description: "Do início ao fim, cuidamos de toda a burocracia para você",
+    icon: Flag,
+    tag: "01",
+    title: "Cidadania Paraguaia",
+    description:
+      "Assessoria completa para obtenção da cidadania paraguaia com acompanhamento em todas as etapas.",
+    items: [
+      "Preparação e conferência de documentos",
+      "Orientação sobre requisitos legais",
+      "Protocolos presenciais e administrativos",
+      "Auxílio com documentos brasileiros",
+      "Consultoria personalizada",
+    ],
+    accentColor: "#D52B1E",
+    gradientFrom: "from-[#D52B1E]/8",
   },
   {
-    icon: Scale,
-    title: "Preparação Documental",
-    description: "Validação e preparação de todos os documentos necessários",
+    icon: CreditCard,
+    tag: "02",
+    title: "Abertura de Conta Bancária",
+    description: "Suporte completo para criar conta bancária paraguaia sem complicações.",
+    items: [
+      "Preparação da documentação",
+      "Acompanhamento no banco",
+      "Orientações para não residentes",
+      "Consultoria sobre bancos",
+    ],
+    accentColor: "rgba(255,255,255,0.5)",
+    gradientFrom: "from-white/4",
   },
   {
-    icon: Users,
-    title: "Representação Legal",
-    description: "Acompanhamento jurídico presencial em todas as etapas do processo",
+    icon: Building2,
+    tag: "03",
+    title: "Abertura de Empresa",
+    description: "Assessoria total para empreender no Paraguai com segurança jurídica.",
+    items: [
+      "Registro inicial da empresa",
+      "Informações sobre exigências legais",
+      "Escolha do tipo de empresa",
+      "Documentação necessária",
+      "Acompanhamento até formalização",
+    ],
+    accentColor: "#0038A8",
+    gradientFrom: "from-[#0038A8]/8",
   },
   {
-    icon: Plane,
-    title: "Apoio Brasil & Paraguai",
-    description: "Suporte completo nos dois países durante todo o processo",
-  },
-  {
-    icon: MessageSquare,
-    title: "Equipe Bilíngue",
-    description: "Comunicação fluente em português e espanhol para sua segurança",
-  },
-  {
-    icon: CheckCircle2,
-    title: "Conformidade 100% Legal",
-    description: "Todos os procedimentos em conformidade com a legislação",
+    icon: GraduationCap,
+    tag: "04",
+    title: "Validação de Diploma",
+    description: "Reconhecimento oficial de diploma universitário brasileiro no Paraguai.",
+    items: [
+      "Assessoria sobre documentos exigidos",
+      "Preparação e envio do processo",
+      "Orientação sobre equivalência",
+      "Acompanhamento até validação",
+    ],
+    accentColor: "#D52B1E",
+    gradientFrom: "from-[#D52B1E]/6",
   },
 ]
 
@@ -42,83 +71,96 @@ export function SolutionSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="solucao" className="py-24 bg-background" ref={ref}>
+    <section id="solucao" className="py-32 bg-transparent relative z-10" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
+          className="text-center max-w-2xl mx-auto mb-20"
+        >
+          <span className="eyebrow block mb-6">Nossos Serviços</span>
+          <h2
+            className="heading-kast mt-5 text-balance"
+            style={{ fontSize: "clamp(2rem,4vw,3.5rem)" }}
           >
-            <span className="text-sm font-semibold text-graphite uppercase tracking-wider">Nossa Solução</span>
-            <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-serif font-semibold text-foreground tracking-tight text-balance">
-              Nós resolvemos a burocracia para você
-            </h2>
-            <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-              A BBLaw oferece uma assessoria jurídica completa e personalizada. Você chega, assina e volta tranquilo.{" "}
-              <strong className="text-foreground">O resto é com a gente.</strong>
-            </p>
+            Soluções completas para{" "}
+            <em style={{ fontStyle: "italic" }}>brasileiros no Paraguai</em>
+          </h2>
+        </motion.div>
 
-            <div className="mt-10 grid sm:grid-cols-2 gap-6">
-              {solutions.map((solution, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
-                  className="flex items-start gap-4"
-                >
-                  <div className="w-10 h-10 bg-graphite/10 rounded-lg flex items-center justify-center shrink-0">
-                    <solution.icon className="w-5 h-5 text-graphite" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground">{solution.title}</h4>
-                    <p className="text-sm text-muted-foreground mt-1">{solution.description}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+        {/* Services Grid */}
+        <div className="grid md:grid-cols-2 gap-px bg-white/5 rounded-2xl overflow-hidden">
+          {services.map((service, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 24 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.15 + index * 0.1 }}
+              className={`relative bg-black bg-gradient-to-br ${service.gradientFrom} to-transparent p-10 group hover:bg-white/[0.015] transition-all duration-500`}
+            >
+              {/* Tag */}
+              <span className="text-[10px] font-light tracking-[0.3em] text-white/20 mb-8 block">
+                {service.tag}
+              </span>
 
-          {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="relative"
-          >
-            <div className="relative rounded-3xl overflow-hidden aspect-[4/5]">
-              <img
-                src="/professional-lawyers-team-meeting-office-modern-bu.jpg"
-                alt="Equipe BBLaw em reunião"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-graphite/60 to-transparent" />
-              <div className="absolute bottom-8 left-8 right-8">
-                <div className="bg-card/95 backdrop-blur-sm rounded-2xl p-6 border border-border">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="flex -space-x-3">
-                      {[1, 2, 3].map((i) => (
-                        <div key={i} className="w-10 h-10 rounded-full border-2 border-card bg-muted" />
-                      ))}
-                    </div>
-                    <div className="text-sm">
-                      <p className="font-semibold text-foreground">+200 clientes</p>
-                      <p className="text-muted-foreground">já conquistaram</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-1">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <svg key={i} className="w-5 h-5 text-yellow-500 fill-current" viewBox="0 0 20 20">
-                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                      </svg>
-                    ))}
-                  </div>
-                </div>
+              {/* Icon */}
+              <div className="mb-6">
+                <service.icon
+                  className="w-6 h-6 transition-colors duration-300"
+                  strokeWidth={1}
+                  style={{ color: service.accentColor, opacity: 0.5 }}
+                />
               </div>
-            </div>
-          </motion.div>
+
+              {/* Title */}
+              <h3 className="text-xl font-light text-white/75 mb-3 tracking-tight group-hover:text-white/95 transition-colors duration-300">
+                {service.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-sm font-light text-white/52 leading-relaxed mb-8 group-hover:text-white/65 transition-colors duration-300">
+                {service.description}
+              </p>
+
+              {/* Divider */}
+              <div className="w-full h-px bg-white/5 mb-8" />
+
+              {/* Items */}
+              <ul className="space-y-3">
+                {service.items.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span
+                      className="w-1 h-1 rounded-full mt-2 shrink-0"
+                      style={{ backgroundColor: service.accentColor, opacity: 0.6 }}
+                    />
+                    <span className="text-sm font-light text-white/55 leading-relaxed group-hover:text-white/70 transition-colors duration-300">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* CTA */}
+              <div className="mt-10">
+                <a
+                  href="#contato"
+                  className="inline-flex items-center gap-2 text-sm font-light opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0"
+                  style={{ color: service.accentColor }}
+                >
+                  Saber mais
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+
+              {/* Bottom accent */}
+              <div
+                className="absolute bottom-0 left-0 h-px w-0 group-hover:w-full transition-all duration-700"
+                style={{ background: `linear-gradient(90deg, ${service.accentColor}60, transparent)` }}
+              />
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

@@ -4,83 +4,85 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
 
 const navItems = [
   { label: "Início", href: "#hero" },
   { label: "Por que Paraguai", href: "#problema" },
-  { label: "Nossa Solução", href: "#solucao" },
+  { label: "Serviços", href: "#solucao" },
   { label: "Como Funciona", href: "#processo" },
-  { label: "Sobre Nós", href: "#sobre" },
   { label: "FAQ", href: "#faq" },
 ]
+
+const WA_LINK =
+  "https://wa.me/5511982712025?text=Gostaria%20de%20agendar%20uma%20consultoria%20para%20tirar%20minha%20cidadania%20do%20paraguai."
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
+    const handleScroll = () => setIsScrolled(window.scrollY > 95)
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   return (
     <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/95 backdrop-blur-md shadow-sm border-b border-border" : "bg-transparent"
-      }`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: isScrolled ? 1 : 0 }}
+      transition={{ duration: 0.5 }}
+      className="fixed top-0 left-0 right-0 z-50 bg-black/88 backdrop-blur-md border-b border-white/5"
+      style={{ pointerEvents: isScrolled ? "auto" : "none" }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-8 lg:px-20">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          {/* <a href="#hero" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">BB</span>
-            </div>
-            <span className="text-xl font-semibold text-foreground tracking-tight">BBLaw</span>
-          </a> */}
 
-<Link href="/" className="flex items-center">
-  <img 
-    src="/Logofundopreto.png" 
-    alt="Offshore Logo" 
-    className="h-22 w-auto object-contain"
-  />
-</Link>
+          {/* Logo — desliza suavemente ao aparecer */}
+          <motion.div
+            initial={{ opacity: 0, x: -12 }}
+            animate={{ opacity: isScrolled ? 1 : 0, x: isScrolled ? 0 : -12 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            <Link href="/" className="flex items-center">
+              <img src="/LogoBranco.svg" alt="BBLaw" className="h-8 w-auto object-contain opacity-80" />
+            </Link>
+          </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-12">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                className="text-[10px] font-light tracking-[0.18em] text-white/55 hover:text-white/65 transition-colors duration-300 uppercase"
               >
                 {item.label}
               </a>
             ))}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden lg:flex items-center gap-4">
-            <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-6">
-              <a href="#contato">Agendar Consulta</a>
-            </Button>
+          {/* CTA */}
+          <div className="hidden lg:flex items-center">
+            <a
+              href={WA_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[10px] font-light tracking-wide border border-white/10 text-white/58 hover:border-white/25 hover:text-white/62 transition-all duration-300 px-7 py-2.5 rounded-full"
+            >
+              Agendar Consulta
+            </a>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-foreground"
+            className="lg:hidden p-2 text-white/45 hover:text-white transition-colors"
             aria-label="Menu"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen
+              ? <X size={18} strokeWidth={1} />
+              : <Menu size={18} strokeWidth={1} />
+            }
           </button>
         </div>
       </div>
@@ -92,22 +94,28 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-background border-t border-border"
+            className="lg:hidden bg-black/95 border-t border-white/5"
           >
-            <nav className="flex flex-col p-4 gap-4">
+            <nav className="flex flex-col px-6 py-8 gap-6">
               {navItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                  className="text-sm font-light text-white/40 hover:text-white/65 transition-colors tracking-wide"
                 >
                   {item.label}
                 </a>
               ))}
-              <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full mt-4">
-                <a href="#contato">Agendar Consulta</a>
-              </Button>
+              <a
+                href={WA_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="mt-2 text-sm font-light border border-white/12 text-white/45 text-center py-3 rounded-full hover:border-white/25 transition-all"
+              >
+                Agendar Consulta
+              </a>
             </nav>
           </motion.div>
         )}

@@ -2,50 +2,35 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { Search, ClipboardList, FileCheck, Calendar, Stamp, CreditCard, Flag } from "lucide-react"
 
 const steps = [
   {
     number: "01",
-    icon: Search,
-    title: "Consulta de Viabilidade",
-    description: "Analisamos seu caso e verificamos todos os requisitos para iniciar o processo",
+    title: "Consulta Inicial",
+    description:
+      "Entre em contato conosco. Analisamos seu caso e explicamos todas as possibilidades e requisitos.",
+    color: "#D52B1E",
   },
   {
     number: "02",
-    icon: ClipboardList,
-    title: "Checklist Completo",
-    description: "Preparamos uma lista detalhada de todos os documentos necessários",
+    title: "Documentação",
+    description:
+      "Orientamos sobre todos os documentos necessários e auxiliamos na preparação completa.",
+    color: "rgba(255,255,255,0.5)",
   },
   {
     number: "03",
-    icon: FileCheck,
-    title: "Preparação Jurídica",
-    description: "Validamos e preparamos toda a documentação de forma antecipada",
+    title: "Protocolo",
+    description:
+      "Nossa equipe no Paraguai realiza todos os protocolos e procedimentos oficiais necessários.",
+    color: "#0038A8",
   },
   {
     number: "04",
-    icon: Calendar,
-    title: "Agendamento da Viagem",
-    description: "Organizamos sua ida ao Paraguai com toda a logística necessária",
-  },
-  {
-    number: "05",
-    icon: Stamp,
-    title: "Protocolos Oficiais",
-    description: "Realizamos todos os registros e protocolos junto aos órgãos",
-  },
-  {
-    number: "06",
-    icon: CreditCard,
-    title: "Cartão de Residência",
-    description: "Emissão do seu cartão de residência paraguaia",
-  },
-  {
-    number: "07",
-    icon: Flag,
-    title: "Cidadania Permanente",
-    description: "Acompanhamento até a obtenção da cidadania permanente completa",
+    title: "Finalização",
+    description:
+      "Acompanhamos até a conclusão final do seu processo com toda segurança jurídica.",
+    color: "#D52B1E",
   },
 ]
 
@@ -54,64 +39,96 @@ export function ProcessSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="processo" className="py-24 bg-secondary/50" ref={ref}>
+    <section id="processo" className="py-32 bg-transparent relative z-10" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          transition={{ duration: 0.7 }}
+          className="text-center max-w-xl mx-auto mb-24"
         >
-          <span className="text-sm font-semibold text-primary uppercase tracking-wider">Como Funciona</span>
-          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-serif font-semibold text-foreground tracking-tight">
-            Etapas do Processo
+          <span className="eyebrow block mb-6">Como funciona</span>
+          <h2
+            className="heading-kast mt-5 text-balance"
+            style={{ fontSize: "clamp(2rem,4vw,3.5rem)" }}
+          >
+            Passo a passo{" "}
+            <em style={{ fontStyle: "italic" }}>simples e organizado</em>
           </h2>
-          <p className="mt-6 text-lg text-muted-foreground">
-            Um processo claro, transparente e eficiente do início ao fim
-          </p>
         </motion.div>
 
-        {/* Process Timeline */}
+        {/* Steps — horizontal line with nodes on desktop */}
         <div className="relative">
-          {/* Connection Line */}
-          <div className="absolute left-8 lg:left-1/2 top-0 bottom-0 w-px bg-border lg:-translate-x-px hidden md:block" />
+          {/* Connecting line */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={isInView ? { scaleX: 1 } : {}}
+            transition={{ duration: 1.2, delay: 0.4 }}
+            className="hidden lg:block absolute top-[2.25rem] left-0 right-0 h-px bg-white/8 origin-left"
+          />
 
-          <div className="space-y-8 lg:space-y-12">
+          <div className="grid lg:grid-cols-4 gap-12 lg:gap-8">
             {steps.map((step, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`relative flex flex-col lg:flex-row items-start gap-6 lg:gap-12 ${
-                  index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-                }`}
+                transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
+                className="relative group"
               >
-                {/* Content */}
-                <div className={`flex-1 ${index % 2 === 0 ? "lg:text-right" : "lg:text-left"} pl-20 lg:pl-0`}>
+                {/* Node */}
+                <div className="flex items-center gap-4 mb-8">
                   <div
-                    className={`bg-card p-6 rounded-2xl border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300 ${
-                      index % 2 === 0 ? "lg:ml-auto" : "lg:mr-auto"
-                    } max-w-md`}
+                    className="relative w-[18px] h-[18px] rounded-full border flex items-center justify-center shrink-0 transition-all duration-300 group-hover:scale-125"
+                    style={{ borderColor: step.color + "60" }}
                   >
-                    <span className="text-5xl font-serif font-bold text-primary/20">{step.number}</span>
-                    <h3 className="text-xl font-semibold text-foreground mt-2">{step.title}</h3>
-                    <p className="text-muted-foreground mt-2 leading-relaxed">{step.description}</p>
+                    <div
+                      className="w-1.5 h-1.5 rounded-full"
+                      style={{ backgroundColor: step.color, opacity: 0.7 }}
+                    />
                   </div>
+                  {/* Step number */}
+                  <span
+                    className="text-[10px] font-light tracking-[0.25em]"
+                    style={{ color: step.color, opacity: 0.5 }}
+                  >
+                    {step.number}
+                  </span>
                 </div>
 
-                {/* Icon */}
-                <div className="absolute left-0 lg:left-1/2 lg:-translate-x-1/2 w-16 h-16 bg-primary rounded-2xl flex items-center justify-center shadow-lg z-10">
-                  <step.icon className="w-7 h-7 text-primary-foreground" />
-                </div>
+                {/* Content */}
+                <h3 className="text-lg font-light text-white/75 mb-3 tracking-tight group-hover:text-white/95 transition-colors duration-300">
+                  {step.title}
+                </h3>
+                <p className="text-sm font-light text-white/52 leading-relaxed group-hover:text-white/65 transition-colors duration-300">
+                  {step.description}
+                </p>
 
-                {/* Spacer for opposite side */}
-                <div className="flex-1 hidden lg:block" />
+                {/* Accent line below */}
+                <div
+                  className="mt-6 h-px w-0 group-hover:w-full transition-all duration-500"
+                  style={{ background: `linear-gradient(90deg, ${step.color}50, transparent)` }}
+                />
               </motion.div>
             ))}
           </div>
         </div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.9 }}
+          className="mt-20 text-center"
+        >
+          <a
+            href="#contato"
+            className="inline-flex items-center gap-3 border border-white/10 text-white/70 text-sm font-light tracking-wide px-8 py-4 rounded-full hover:border-white/25 hover:text-white/70 transition-all duration-300"
+          >
+            Iniciar meu processo agora
+          </a>
+        </motion.div>
       </div>
     </section>
   )

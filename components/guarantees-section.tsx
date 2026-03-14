@@ -2,28 +2,44 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { ShieldCheck, Eye, Scale, FileCheck, HeartHandshake } from "lucide-react"
+import { ShieldCheck, Eye, Scale, FileCheck, HeartHandshake, Zap } from "lucide-react"
 
 const guarantees = [
   {
     icon: Eye,
     title: "Transparência Total",
-    description: "Você acompanha cada etapa do processo com clareza e sem surpresas",
+    description: "Você acompanha cada etapa do processo com clareza e sem surpresas.",
+    color: "rgba(255,255,255,0.4)",
   },
   {
     icon: Scale,
     title: "Acompanhamento Legal",
-    description: "Advogados especializados cuidam de toda a parte jurídica do início ao fim",
+    description: "Profissionais especializados cuidam de toda a parte jurídica do início ao fim.",
+    color: "#0038A8",
   },
   {
     icon: FileCheck,
     title: "Conformidade Completa",
-    description: "Todos os procedimentos seguem rigorosamente a legislação vigente",
+    description: "Todos os procedimentos seguem rigorosamente a legislação vigente.",
+    color: "#D52B1E",
   },
   {
     icon: HeartHandshake,
     title: "Suporte Dedicado",
-    description: "Linha direta com o escritório durante todo o processo de cidadania",
+    description: "Linha direta com o escritório durante todo o processo.",
+    color: "rgba(255,255,255,0.4)",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Segurança Jurídica",
+    description: "Procedimentos organizados e documentados em todas as etapas.",
+    color: "#D52B1E",
+  },
+  {
+    icon: Zap,
+    title: "Processo Ágil",
+    description: "Experiência que garante menos erros e processos mais rápidos.",
+    color: "#0038A8",
   },
 ]
 
@@ -32,74 +48,58 @@ export function GuaranteesSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="garantias" className="py-24 bg-primary" ref={ref}>
+    <section id="garantias" className="py-32 bg-transparent border-t border-white/5 relative z-10" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
+          className="max-w-2xl mb-20"
+        >
+          <span className="eyebrow block mb-6">Nossas Garantias</span>
+          <h2
+            className="heading-kast mt-5 text-balance"
+            style={{ fontSize: "clamp(2rem,4vw,3.5rem)" }}
           >
-            <div className="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-2 mb-6">
-              <ShieldCheck className="w-5 h-5 text-white" />
-              <span className="text-sm font-medium text-white">Garantia BBLaw</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-semibold text-white tracking-tight text-balance">
-              Seu processo com segurança jurídica de verdade
-            </h2>
-            <p className="mt-6 text-lg text-white/80 leading-relaxed">
-              Na BBLaw, não trabalhamos com ciência jurídica superficial. Cada procedimento é realizado conforme a
-              legislação vigente, com acompanhamento real por advogados especializados.
-            </p>
+            Seu processo com{" "}
+            <em style={{ fontStyle: "italic" }}>segurança jurídica</em>{" "}
+            de verdade
+          </h2>
+          <p className="mt-5 text-sm font-light text-white/55 leading-relaxed max-w-lg">
+            Cada procedimento é realizado conforme a legislação vigente, com acompanhamento
+            real por profissionais especializados.
+          </p>
+        </motion.div>
 
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {guarantees.map((guarantee, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
-                  className="bg-white/5 backdrop-blur-sm rounded-2xl p-5 border border-white/10"
-                >
-                  <guarantee.icon className="w-8 h-8 text-white mb-3" />
-                  <h4 className="font-semibold text-white mb-1">{guarantee.title}</h4>
-                  <p className="text-sm text-white/70">{guarantee.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Visual */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="relative"
-          >
-            <div className="relative rounded-3xl overflow-hidden aspect-square">
-              <img src="/legal-documents-contract-signing-professional-busi.jpg" alt="Documentos legais" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary to-transparent opacity-60" />
-            </div>
-
-            {/* Floating Card */}
+        {/* Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden">
+          {guarantees.map((item, index) => (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              key={index}
+              initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="absolute -bottom-6 -left-6 bg-card rounded-2xl p-6 shadow-2xl max-w-xs"
+              transition={{ duration: 0.5, delay: 0.1 + index * 0.08 }}
+              className="bg-black/55 p-8 group hover:bg-black/40 transition-all duration-500 cursor-default"
             >
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                  <ShieldCheck className="w-5 h-5 text-green-600" />
-                </div>
-                <span className="font-semibold text-foreground">100% Conformidade</span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Todos os processos em conformidade com a legislação paraguaia e brasileira
+              <item.icon
+                className="w-5 h-5 mb-6 transition-all duration-300"
+                strokeWidth={1}
+                style={{ color: item.color, opacity: 0.6 }}
+              />
+              <h4 className="text-base font-light text-white/75 mb-2 group-hover:text-white/95 transition-colors duration-300">
+                {item.title}
+              </h4>
+              <p className="text-sm font-light text-white/52 leading-relaxed group-hover:text-white/65 transition-colors duration-300">
+                {item.description}
               </p>
+
+              <div
+                className="mt-6 h-px w-0 group-hover:w-full transition-all duration-700"
+                style={{ background: `linear-gradient(90deg, ${item.color}60, transparent)` }}
+              />
             </motion.div>
-          </motion.div>
+          ))}
         </div>
       </div>
     </section>

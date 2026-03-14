@@ -3,114 +3,117 @@
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { ArrowRight, Phone, Mail, MessageCircle } from "lucide-react"
-import { Button } from "@/components/ui/button"
+
+const WA_LINK =
+  "https://wa.me/5511982712025?text=Gostaria%20de%20agendar%20uma%20consultoria%20para%20tirar%20minha%20cidadania%20do%20paraguai."
 
 export function CTASection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="contato" className="py-24 bg-background" ref={ref}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="relative bg-graphite rounded-3xl overflow-hidden"
-        >
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
+    <section id="cta" className="relative py-36 bg-transparent overflow-hidden" ref={ref}>
+      {/* soft glow centrado */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(213,43,30,0.07) 0%, transparent 70%)",
+        }}
+      />
+
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-24 items-center">
+          {/* Left — copy + CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7 }}
+          >
+            <span className="eyebrow block mb-6">Contato</span>
+
+            <h2
+              className="heading-kast text-balance"
+              style={{ fontSize: "clamp(2.4rem, 4.5vw, 4rem)" }}
+            >
+              Pronto para conquistar
+              <br />
+              sua <em style={{ fontStyle: "italic" }}>cidadania paraguaia?</em>
+            </h2>
+
+            <p className="mt-7 text-sm font-light text-white/70 leading-[2] max-w-sm">
+              Fale agora pelo WhatsApp e descubra como podemos simplificar todo o seu processo.
+            </p>
+
+            <div className="mt-10 flex flex-col sm:flex-row gap-4">
+              {/* Botão primário — borda rotativa PY */}
+              <div className="btn-py-ring">
+                <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="btn-py-inner">
+                  <MessageCircle className="w-4 h-4" />
+                  Falar no WhatsApp
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+
+              <a
+                href="mailto:contato@bezerraborges.com.br"
+                className="inline-flex items-center gap-2 border border-white/10 text-white/55 text-sm font-light tracking-wide px-7 py-4 rounded-full hover:border-white/22 hover:text-white/55 transition-all duration-300"
+              >
+                <Mail className="w-4 h-4" />
+                Enviar E-mail
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Right — infos de contato sem card boxado */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="relative"
+          >
+            {/* soft glow no card direito */}
             <div
-              className="absolute inset-0"
+              className="absolute -inset-8 pointer-events-none"
               style={{
-                backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-                backgroundSize: "32px 32px",
+                background:
+                  "radial-gradient(ellipse 90% 80% at 50% 50%, rgba(0,56,168,0.06) 0%, transparent 70%)",
               }}
             />
-          </div>
 
-          <div className="relative grid lg:grid-cols-2 gap-12 p-8 lg:p-16">
-            {/* Content */}
-            <div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-semibold text-white tracking-tight text-balance">
-                Pronto para conquistar sua cidadania paraguaia?
-              </h2>
-              <p className="mt-6 text-lg text-zinc-400 leading-relaxed">
-                Agende uma consulta gratuita com nossa equipe e descubra como podemos ajudar você a alcançar sua
-                liberdade internacional.
-              </p>
+            <div className="relative space-y-8">
+              <span className="eyebrow block mb-8">Entre em contato</span>
 
-              <div className="mt-10 flex flex-col sm:flex-row gap-4">
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-white hover:bg-zinc-100 text-graphite rounded-full px-8 py-6 text-lg font-medium group"
+              {[
+                { icon: Phone, label: "Telefone", value: "+55 11 98271-2025", href: "tel:+5511982712025" },
+                { icon: Mail, label: "E-mail", value: "contato@bezerraborges.com.br", href: "mailto:contato@bezerraborges.com.br" },
+                { icon: MessageCircle, label: "WhatsApp", value: "+55 11 98271-2025", href: WA_LINK },
+              ].map(({ icon: Icon, label, value, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-5 group"
                 >
-                  <a href="https://wa.me/5511982712025" target="_blank" rel="noopener noreferrer">
-                    <MessageCircle className="w-5 h-5 mr-2" />
-                    Falar no WhatsApp
-                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </a>
-                </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="rounded-full px-8 py-6 text-lg font-medium border-zinc-600 text-white hover:bg-white/10 hover:text-white bg-transparent"
-                >
-                  <a href="contato@bezerraborges.com.br">
-                    <Mail className="w-5 h-5 mr-2" />
-                    Enviar E-mail
-                  </a>
-                </Button>
+                  <div className="w-9 h-9 rounded-full border border-white/8 flex items-center justify-center shrink-0 group-hover:border-white/20 transition-colors">
+                    <Icon className="w-3.5 h-3.5 text-white/55 group-hover:text-white/60 transition-colors" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] tracking-[0.2em] uppercase text-white/48 font-light mb-0.5">{label}</p>
+                    <p className="text-sm font-light text-white/55 group-hover:text-white/80 transition-colors">{value}</p>
+                  </div>
+                </a>
+              ))}
+
+              {/* Separador */}
+              <div className="border-t border-white/6 pt-6">
+                <p className="text-[10px] tracking-[0.2em] uppercase text-white/20 font-light mb-1">Horário</p>
+                <p className="text-sm font-light text-white/60">Segunda a Sexta, 9h às 18h</p>
               </div>
             </div>
-
-            {/* Contact Info */}
-            <div className="flex flex-col justify-center">
-              <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <h3 className="text-xl font-semibold text-white mb-6">Entre em contato</h3>
-
-                <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center shrink-0">
-                      <Phone className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-zinc-400">Telefone</p>
-                      <p className="text-white font-medium">+55 11-98271-2025</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center shrink-0">
-                      <Mail className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-zinc-400">E-mail</p>
-                      <p className="text-white font-medium">contato@bezerraborges.com.br</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center shrink-0">
-                      <MessageCircle className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-zinc-400">WhatsApp</p>
-                      <p className="text-white font-medium">+55 11-98271-2025</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-8 pt-6 border-t border-white/10">
-                  <p className="text-sm text-zinc-400">Horário de atendimento</p>
-                  <p className="text-white font-medium">Segunda a Sexta, 9h às 18h</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   )

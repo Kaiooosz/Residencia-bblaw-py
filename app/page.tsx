@@ -5,15 +5,13 @@ import { SolutionSection } from "@/components/solution-section"
 import { ProcessSection } from "@/components/process-section"
 import { TestimonialsSection } from "@/components/testimonials-section"
 import { GuaranteesSection } from "@/components/guarantees-section"
-import { TeamSection } from "@/components/teamSection"
 import { FAQSection } from "@/components/faq-section"
-import { CTASection } from "@/components/cta-section"
-import { Footer } from "@/components/footer"
 import { ContactSection } from "@/components/contact-section"
+import { Footer } from "@/components/footer"
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen">
       <Header />
       <HeroSection />
       <ProblemSection />
@@ -21,9 +19,7 @@ export default function Home() {
       <ProcessSection />
       <TestimonialsSection />
       <GuaranteesSection />
-      <TeamSection     />
       <FAQSection />
-      <CTASection />
       <ContactSection />
       <Footer />
     </main>

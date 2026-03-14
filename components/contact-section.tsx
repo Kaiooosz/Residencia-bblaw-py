@@ -1,151 +1,175 @@
 "use client"
 
 import type React from "react"
+import { motion, useInView } from "framer-motion"
+import { useRef, useState } from "react"
+import { ArrowRight, MessageCircle } from "lucide-react"
 
-import { ScrollAnimation } from "@/components/scroll-animation"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Calendar, ArrowRight } from "lucide-react"
-import { useState } from "react"
+const WA_LINK =
+  "https://wa.me/5511982712025?text=Gostaria%20de%20agendar%20uma%20consultoria%20para%20tirar%20minha%20cidadania%20do%20paraguai."
 
 export function ContactSection() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    patrimony: "",
     message: "",
   })
+  const [sent, setSent] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    console.log(formData)
+    // Redireciona para WhatsApp com os dados preenchidos
+    const msg = `Olá! Me chamo ${formData.name}. ${formData.message || "Gostaria de agendar uma consultoria para tirar minha cidadania do paraguai."}`
+    window.open(
+      `https://wa.me/5511982712025?text=${encodeURIComponent(msg)}`,
+      "_blank"
+    )
+    setSent(true)
   }
 
+  const inputClass =
+    "w-full bg-transparent border-b border-white/15 py-3 text-sm font-light text-white/85 placeholder:text-white/55 focus:outline-none focus:border-white/40 transition-colors duration-300"
+
   return (
-    <section className="py-24 bg-primary text-primary-foreground" id="contato">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-start max-w-6xl mx-auto">
-          {/* Left Content */}
-          <ScrollAnimation animation="slide-left">
-            <span className="text-sm font-medium text-titanium-light uppercase tracking-wider">Contato</span>
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold mt-3 mb-6 text-balance">
-              Agende sua consulta
+    <section id="contato" className="py-32 bg-transparent relative z-10" ref={ref}>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-24 items-start">
+
+          {/* Left — copy */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7 }}
+          >
+            <span className="eyebrow block mb-6">Contato</span>
+            <h2
+              className="heading-kast text-balance"
+              style={{ fontSize: "clamp(2.4rem, 4.5vw, 4rem)" }}
+            >
+              Agende sua
+              <br />
+              <em style={{ fontStyle: "italic" }}>consulta</em>
             </h2>
-            <p className="text-lg text-primary-foreground/70 mb-8 leading-relaxed text-pretty">
-              Dê o primeiro passo para a internacionalização do seu patrimônio. Nossa equipe entrará em contato em até
-              24 horas para agendar uma conversa personalizada.
+            <p className="mt-7 text-sm font-light text-white/52 leading-[2] max-w-xs">
+              Dê o primeiro passo. Nossa equipe entrará em contato em até 24 horas para agendar
+              uma conversa personalizada.
             </p>
 
-            <div className="space-y-6">
-              <div className="flex items-center gap-4 p-4 bg-primary-foreground/5 rounded-lg border border-primary-foreground/10">
-                <Calendar className="h-10 w-10 text-titanium-light" />
-                <div>
-                  <h3 className="font-semibold mb-1">Consulta Online ou Presencial</h3>
-                  <p className="text-sm text-primary-foreground/60">Escolha o formato mais conveniente para você</p>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div className="p-4 bg-primary-foreground/5 rounded-lg border border-primary-foreground/10">
-                  <p className="font-semibold mb-1">Tempo médio</p>
-                  <p className="text-primary-foreground/60">45 minutos</p>
-                </div>
-                {/* <div className="p-4 bg-primary-foreground/5 rounded-lg border border-primary-foreground/10">
-                  <p className="font-semibold mb-1">Valor</p>
-                  <p className="text-primary-foreground/60">$100,00</p>
-                </div> */}
+            {/* WhatsApp direto */}
+            <div className="mt-10">
+              <div className="btn-py-ring inline-flex">
+                <a
+                  href={WA_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-py-inner"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  Falar agora no WhatsApp
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
               </div>
             </div>
-          </ScrollAnimation>
 
-          {/* Right Content - Form */}
-          <ScrollAnimation animation="slide-right">
-            <form onSubmit={handleSubmit} className="bg-background text-foreground p-8 rounded-2xl">
-              <h3 className="font-semibold text-xl mb-6">Preencha seus dados</h3>
-              <div className="space-y-4">
+            <div className="mt-10 pt-8 border-t border-white/6 space-y-4">
+              <div>
+                <p className="eyebrow mb-1">Telefone</p>
+                <p className="text-sm font-light text-white/65">+55 11 98271-2025</p>
+              </div>
+              <div>
+                <p className="eyebrow mb-1">E-mail</p>
+                <p className="text-sm font-light text-white/65">contato@bezerraborges.com.br</p>
+              </div>
+              <div>
+                <p className="eyebrow mb-1">Horário</p>
+                <p className="text-sm font-light text-white/65">Segunda a Sexta, 9h às 18h</p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right — Formulário minimalista */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.15 }}
+          >
+            {sent ? (
+              <div className="flex flex-col items-start justify-center h-full gap-4 py-20">
+                <div className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center">
+                  <span className="text-white/55 text-lg">✓</span>
+                </div>
+                <h3 className="text-lg font-light text-white/65">Mensagem enviada!</h3>
+                <p className="text-sm font-light text-white/52 leading-relaxed">
+                  Você foi redirecionado para o WhatsApp. Respondemos em até 24h.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-8">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2">
-                    Nome completo
-                  </label>
-                  <Input
-                    id="name"
+                  <label className="eyebrow block mb-2">Nome completo</label>
+                  <input
+                    type="text"
                     placeholder="Seu nome"
+                    className={inputClass}
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
                   />
                 </div>
-                <div className="grid sm:grid-cols-2 gap-4">
+
+                <div className="grid sm:grid-cols-2 gap-8">
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">
-                      E-mail
-                    </label>
-                    <Input
-                      id="email"
+                    <label className="eyebrow block mb-2">E-mail</label>
+                    <input
                       type="email"
                       placeholder="seu@email.com"
+                      className={inputClass}
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
                     />
                   </div>
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium mb-2">
-                      Telefone
-                    </label>
-                    <Input
-                      id="phone"
+                    <label className="eyebrow block mb-2">Telefone</label>
+                    <input
                       type="tel"
-                      placeholder="+55 119999-9999"
+                      placeholder="+55 11 99999-9999"
+                      className={inputClass}
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      required
                     />
                   </div>
                 </div>
+
                 <div>
-                  <label htmlFor="patrimony" className="block text-sm font-medium mb-2">
-                    Faixa de patrimônio
-                  </label>
-                  <select
-                    id="patrimony"
-                    className="w-full h-10 px-3 rounded-md border border-input bg-background text-foreground text-sm"
-                    value={formData.patrimony}
-                    onChange={(e) => setFormData({ ...formData, patrimony: e.target.value })}
-                    required
-                  >
-                    <option value="">Selecione</option>
-                    <option value="500k-1m">R$ 500 mil - R$ 1 milhão</option>
-                    <option value="1m-5m">R$ 1 milhão - R$ 5 milhões</option>
-                    <option value="5m-10m">R$ 5 milhões - R$ 10 milhões</option>
-                    <option value="10m+">Acima de R$ 10 milhões</option>
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
-                    Mensagem (opcional)
-                  </label>
-                  <Textarea
-                    id="message"
-                    placeholder="Conte-nos sobre seus objetivos..."
+                  <label className="eyebrow block mb-2">Mensagem (opcional)</label>
+                  <textarea
                     rows={4}
+                    placeholder="Conte brevemente sobre seu objetivo..."
+                    className={`${inputClass} resize-none`}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   />
                 </div>
-                <Button type="submit" className="w-full" size="lg">
-                  Solicitar Consulta
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-                <p className="text-xs text-muted-foreground text-center">
-                  Ao enviar, você concorda com nossa política de privacidade.
-                </p>
-              </div>
-            </form>
-          </ScrollAnimation>
+
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    className="w-full border border-white/10 text-white/65 text-sm font-light tracking-wide py-4 rounded-full hover:border-white/25 hover:text-white/70 transition-all duration-300 flex items-center justify-center gap-3"
+                  >
+                    Enviar via WhatsApp
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                  <p className="text-center text-[10px] text-white/18 mt-4 tracking-wide">
+                    Ao enviar, você será redirecionado ao WhatsApp
+                  </p>
+                </div>
+              </form>
+            )}
+          </motion.div>
         </div>
       </div>
     </section>

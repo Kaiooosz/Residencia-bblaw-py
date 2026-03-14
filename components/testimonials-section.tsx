@@ -2,8 +2,8 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef, useState } from "react"
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import Image from "next/image"
 
 const testimonials = [
   {
@@ -13,6 +13,7 @@ const testimonials = [
     author: "Carlos Eduardo M.",
     role: "Empresário",
     location: "São Paulo, SP",
+    image: "/person-carlos.jpg",
   },
   {
     id: 2,
@@ -21,6 +22,7 @@ const testimonials = [
     author: "Marina Costa S.",
     role: "Investidora",
     location: "Rio de Janeiro, RJ",
+    image: "/person-marina.jpg",
   },
   {
     id: 3,
@@ -29,129 +31,135 @@ const testimonials = [
     author: "Roberto Almeida",
     role: "Consultor Financeiro",
     location: "Belo Horizonte, MG",
+    image: "/person-roberto.jpg",
   },
+]
+
+const stats = [
+  { value: "200+", label: "Processos Concluídos" },
+  { value: "5+",   label: "Anos de Experiência" },
+  { value: "100%", label: "Conformidade Legal" },
 ]
 
 export function TestimonialsSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [current, setCurrent] = useState(0)
 
-  const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length)
-  }
+  const next = () => setCurrent((p) => (p + 1) % testimonials.length)
+  const prev = () => setCurrent((p) => (p - 1 + testimonials.length) % testimonials.length)
 
-  const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
-  }
+  const t = testimonials[current]
 
   return (
-    <section id="depoimentos" className="py-24 bg-background" ref={ref}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+    <section id="depoimentos" className="py-32 bg-transparent relative z-10" ref={ref}>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          transition={{ duration: 0.7 }}
+          className="mb-20"
         >
-          <span className="text-sm font-semibold text-primary uppercase tracking-wider">Depoimentos</span>
-          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-serif font-semibold text-foreground tracking-tight">
-            O que nossos clientes dizem
+          <span className="eyebrow block mb-6">Depoimentos</span>
+          <h2
+            className="heading-kast"
+            style={{ fontSize: "clamp(2.4rem, 5vw, 4.5rem)" }}
+          >
+            O que nossos
+            <br />
+            <em style={{ fontStyle: "italic" }}>clientes dizem</em>
           </h2>
         </motion.div>
 
-        {/* Testimonials Carousel */}
+        {/* Carousel */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.7, delay: 0.15 }}
           className="relative"
         >
-          <div className="bg-secondary/50 rounded-3xl p-8 lg:p-12 max-w-4xl mx-auto">
-            <Quote className="w-12 h-12 text-primary/30 mb-6" />
+          <motion.div
+            key={current}
+            initial={{ opacity: 0, x: 16 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            {/* Quote */}
+            <p
+              className="text-xl sm:text-2xl font-extralight leading-[1.7] mb-12 max-w-3xl"
+              style={{ color: "rgba(255,255,255,0.6)" }}
+            >
+              "{t.content}"
+            </p>
 
-            <div className="relative overflow-hidden">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.4 }}
-              >
-                <p className="text-xl lg:text-2xl text-foreground leading-relaxed font-serif">
-                  "{testimonials[currentIndex].content}"
+            {/* Author */}
+            <div className="flex items-center gap-5">
+              <div className="relative w-12 h-12 rounded-full overflow-hidden border border-white/10 shrink-0">
+                <Image
+                  src={t.image}
+                  alt={t.author}
+                  fill
+                  className="object-cover grayscale"
+                  unoptimized
+                />
+              </div>
+              <div>
+                <p className="text-sm font-light text-white/65">{t.author}</p>
+                <p className="text-xs font-light text-white/70 tracking-wide mt-0.5">
+                  {t.role} · {t.location}
                 </p>
-
-                <div className="mt-8 flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full bg-muted flex items-center justify-center">
-                    <span className="text-xl font-semibold text-muted-foreground">
-                      {testimonials[currentIndex].author.charAt(0)}
-                    </span>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-foreground">{testimonials[currentIndex].author}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {testimonials[currentIndex].role} • {testimonials[currentIndex].location}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
+              </div>
             </div>
+          </motion.div>
 
-            {/* Navigation */}
-            <div className="flex items-center justify-between mt-8 pt-8 border-t border-border">
-              <div className="flex gap-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentIndex(index)}
-                    className={`w-2 h-2 rounded-full transition-all ${
-                      index === currentIndex ? "bg-primary w-6" : "bg-muted-foreground/30"
-                    }`}
-                    aria-label={`Ver depoimento ${index + 1}`}
-                  />
-                ))}
-              </div>
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={prevTestimonial}
-                  className="rounded-full bg-transparent"
-                  aria-label="Anterior"
+          {/* Navigation */}
+          <div className="flex items-center justify-between mt-12 pt-8 border-t border-white/6">
+            <div className="flex gap-2">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrent(i)}
+                  className="rounded-full transition-all duration-300"
+                  style={{
+                    width: i === current ? "1.5rem" : "0.5rem",
+                    height: "0.5rem",
+                    background: i === current ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.15)",
+                  }}
+                  aria-label={`Ver depoimento ${i + 1}`}
+                />
+              ))}
+            </div>
+            <div className="flex gap-2">
+              {[{ fn: prev, label: "Anterior" }, { fn: next, label: "Próximo" }].map(({ fn, label }) => (
+                <button
+                  key={label}
+                  onClick={fn}
+                  aria-label={label}
+                  className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-white/52 hover:border-white/25 hover:text-white/55 transition-all"
                 >
-                  <ChevronLeft className="w-5 h-5" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={nextTestimonial}
-                  className="rounded-full bg-transparent"
-                  aria-label="Próximo"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </Button>
-              </div>
+                  {label === "Anterior"
+                    ? <ChevronLeft className="w-4 h-4" strokeWidth={1} />
+                    : <ChevronRight className="w-4 h-4" strokeWidth={1} />
+                  }
+                </button>
+              ))}
             </div>
           </div>
         </motion.div>
 
-        {/* Trust Badges */}
+        {/* Stats */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-16 flex flex-wrap items-center justify-center gap-8 lg:gap-16"
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="mt-24 grid grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden"
         >
-          {[
-            { value: "200+", label: "Processos Concluídos" },
-            { value: "5+", label: "Anos de Experiência" },
-            { value: "100%", label: "Conformidade Legal" },
-          ].map((badge, index) => (
-            <div key={index} className="text-center px-6 py-4 bg-secondary/50 rounded-2xl">
-              <p className="text-2xl font-bold text-primary">{badge.value}</p>
-              <p className="text-sm text-muted-foreground">{badge.label}</p>
+          {stats.map(({ value, label }) => (
+            <div key={label} className="bg-black/60 px-8 py-8 text-center">
+              <p className="heading-kast text-3xl">{value}</p>
+              <p className="mt-2 text-xs font-light text-white/70 tracking-wide">{label}</p>
             </div>
           ))}
         </motion.div>

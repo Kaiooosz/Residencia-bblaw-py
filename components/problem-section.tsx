@@ -2,22 +2,64 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { Globe2, Building2, TrendingUp, FileCheck, ShieldCheck, XCircle } from "lucide-react"
+import { MessageSquare, Eye, Zap, Users, Shield, Clock } from "lucide-react"
 
-const benefits = [
-  { icon: Globe2, title: "Acesso ao Mercosul", description: "Livre circulação e residência em países do bloco" },
-  { icon: FileCheck, title: "Processo Ágil", description: "Menos burocracia comparado a outros países" },
-  { icon: Building2, title: "Abertura de Empresas", description: "Facilidade para empreender e investir" },
-  { icon: TrendingUp, title: "Estabilidade", description: "Sistema seguro e estável para estrangeiros" },
-  { icon: ShieldCheck, title: "Segurança Jurídica", description: "Legislação clara e bem estabelecida" },
+const reasons = [
+  {
+    icon: MessageSquare,
+    title: "Suporte em Português",
+    description:
+      "Comunicação fácil e suporte completo em português. Nossa equipe entende suas necessidades e facilita todo o processo.",
+  },
+  {
+    icon: Eye,
+    title: "Processo Transparente",
+    description:
+      "Explicamos cada etapa com clareza. Você acompanha todo o desenvolvimento e sabe exatamente o que está acontecendo.",
+  },
+  {
+    icon: Zap,
+    title: "Agilidade e Eficiência",
+    description:
+      "Evitamos gastos desnecessários e erros que atrasam a documentação. Nossa experiência garante processos mais rápidos.",
+  },
+  {
+    icon: Users,
+    title: "Parceiros Locais",
+    description:
+      "Equipe especializada no Paraguai com conhecimento profundo das leis e procedimentos locais.",
+  },
+  {
+    icon: Shield,
+    title: "Processo Seguro",
+    description:
+      "Procedimentos organizados e documentados. Garantimos segurança jurídica em todas as etapas do processo.",
+  },
+  {
+    icon: Clock,
+    title: "Acompanhamento Total",
+    description:
+      "Atendimento de ponta a ponta com atualização constante sobre seu processo e exigências legais.",
+  },
 ]
 
-const problems = [
-  "Erros documentais que invalidam o processo",
-  "Atrasos por desconhecimento dos procedimentos",
-  "Processos indeferidos por falta de acompanhamento",
-  "Perda de prazos importantes",
-  "Gastos desnecessários com retrabalho",
+// Cores da bandeira do Paraguai: vermelho #D52B1E, branco, azul #0038A8
+const cardGradients = [
+  "from-[#D52B1E]/12 via-transparent to-transparent",
+  "from-white/6 via-transparent to-transparent",
+  "from-[#0038A8]/12 via-transparent to-transparent",
+  "from-[#D52B1E]/10 via-[#0038A8]/6 to-transparent",
+  "from-[#0038A8]/10 via-transparent to-transparent",
+  "from-[#D52B1E]/8 via-white/4 to-[#0038A8]/8",
+]
+
+const cardBorders = [
+  "border-[#D52B1E]/20",
+  "border-white/10",
+  "border-[#0038A8]/20",
+  "border-[#D52B1E]/15",
+  "border-[#0038A8]/18",
+  "border-white/8",
 ]
 
 export function ProblemSection() {
@@ -25,73 +67,72 @@ export function ProblemSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="problema" className="py-24 bg-secondary/50" ref={ref}>
+    <section id="problema" className="py-32 bg-transparent relative z-10" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          transition={{ duration: 0.7 }}
+          className="max-w-2xl mb-20"
         >
-          <span className="text-sm font-semibold text-graphite uppercase tracking-wider">Por que o Paraguai?</span>
-          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-serif font-semibold text-foreground tracking-tight text-balance">
-            Por que cada vez mais brasileiros estão buscando a cidadania paraguaia?
+          <span className="eyebrow block mb-6">Por que nos escolher</span>
+          <h2
+            className="heading-kast mt-5 text-balance"
+            style={{ fontSize: "clamp(2rem,4vw,3.5rem)" }}
+          >
+            Trabalhamos em parceria com{" "}
+            <em style={{ fontStyle: "italic" }}>profissionais especializados</em>{" "}
+            no Paraguai
           </h2>
+          <p className="mt-5 text-sm font-light text-white/52 leading-relaxed max-w-lg">
+            Para garantir rapidez, segurança e orientação passo a passo em cada etapa do seu processo.
+          </p>
         </motion.div>
 
-        {/* Benefits Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mb-20">
-          {benefits.map((benefit, index) => (
+        {/* Cards Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden">
+          {reasons.map((reason, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-card p-6 rounded-2xl border border-border hover:border-graphite/30 hover:shadow-lg transition-all duration-300 group"
+              transition={{ duration: 0.5, delay: 0.1 + index * 0.08 }}
+              className={`relative bg-black/55 bg-gradient-to-br ${cardGradients[index]} p-8 group hover:bg-black/40 transition-all duration-500 cursor-default`}
             >
-              <div className="w-12 h-12 bg-graphite/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-graphite/20 transition-colors">
-                <benefit.icon className="w-6 h-6 text-graphite" />
+              {/* Thin border glow on hover */}
+              <div className={`absolute inset-0 border ${cardBorders[index]} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-none`} />
+
+              <div className="relative z-10">
+                {/* Icon */}
+                <div className="mb-6">
+                  <reason.icon className="w-5 h-5 text-white/52 group-hover:text-white/70 transition-colors duration-300" strokeWidth={1} />
+                </div>
+
+                {/* Content */}
+                <h3 className="text-base font-light text-white/75 mb-3 tracking-tight group-hover:text-white/95 transition-colors duration-300">
+                  {reason.title}
+                </h3>
+                <p className="text-sm font-light text-white/52 leading-relaxed group-hover:text-white/65 transition-colors duration-300">
+                  {reason.description}
+                </p>
               </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">{benefit.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{benefit.description}</p>
+
+              {/* Bottom accent line — cores PY */}
+              <div
+                className="absolute bottom-0 left-0 h-px w-0 group-hover:w-full transition-all duration-700"
+                style={{
+                  background:
+                    index % 3 === 0
+                      ? "linear-gradient(90deg, #D52B1E, transparent)"
+                      : index % 3 === 1
+                      ? "linear-gradient(90deg, rgba(255,255,255,0.3), transparent)"
+                      : "linear-gradient(90deg, #0038A8, transparent)",
+                }}
+              />
             </motion.div>
           ))}
         </div>
-
-        {/* Problems Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="bg-graphite rounded-3xl p-8 lg:p-12"
-        >
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-2xl sm:text-3xl font-serif font-semibold text-white mb-6">
-                Mas tentar fazer sozinho pode ser arriscado
-              </h3>
-              <p className="text-zinc-400 leading-relaxed mb-8">
-                O processo de cidadania paraguaia exige conhecimento técnico, documentação específica e acompanhamento
-                presencial. Sem assessoria especializada, você pode enfrentar:
-              </p>
-            </div>
-            <div className="space-y-4">
-              {problems.map((problem, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
-                  className="flex items-center gap-4 bg-white/5 rounded-xl p-4"
-                >
-                  <XCircle className="w-5 h-5 text-red-400 shrink-0" />
-                  <span className="text-zinc-300">{problem}</span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   )

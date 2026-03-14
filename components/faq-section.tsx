@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef, useState } from "react"
-import { ChevronDown } from "lucide-react"
+import { Plus, Minus } from "lucide-react"
 
 const faqs = [
   {
@@ -45,64 +45,78 @@ const faqs = [
 export function FAQSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const [openIndex, setOpenIndex] = useState<number | null>(0)
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section id="faq" className="py-24 bg-secondary/50" ref={ref}>
+    <section id="faq" className="py-32 bg-transparent relative z-10" ref={ref}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.7 }}
+          className="mb-20"
         >
-          <span className="text-sm font-semibold text-primary uppercase tracking-wider">FAQ</span>
-          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-serif font-semibold text-foreground tracking-tight">
-            Perguntas Frequentes
+          <span className="eyebrow block mb-6">FAQ</span>
+          <h2
+            className="heading-kast text-balance"
+            style={{ fontSize: "clamp(2.4rem, 5vw, 4.5rem)" }}
+          >
+            Perguntas
+            <br />
+            <em style={{ fontStyle: "italic" }}>Frequentes</em>
           </h2>
-          <p className="mt-6 text-lg text-muted-foreground">
+          <p className="mt-6 text-sm font-light text-white/70 leading-relaxed">
             Tire suas principais dúvidas sobre o processo de cidadania
           </p>
         </motion.div>
 
-        {/* FAQ Items */}
+        {/* FAQ Items — só linhas, sem cards */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="space-y-4"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.7, delay: 0.2 }}
         >
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.3 + index * 0.05 }}
-              className="bg-card rounded-2xl border border-border overflow-hidden"
+              transition={{ duration: 0.4, delay: 0.25 + index * 0.05 }}
+              className="border-b border-white/6"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full flex items-center justify-between p-6 text-left"
+                className="w-full flex items-center justify-between py-7 text-left gap-6 group"
                 aria-expanded={openIndex === index}
               >
-                <span className="font-semibold text-foreground pr-4">{faq.question}</span>
-                <ChevronDown
-                  className={`w-5 h-5 text-muted-foreground shrink-0 transition-transform duration-300 ${
-                    openIndex === index ? "rotate-180" : ""
-                  }`}
-                />
+                <span
+                  className="text-sm font-light tracking-wide transition-colors duration-300"
+                  style={{ color: openIndex === index ? "rgba(255,255,255,0.75)" : "rgba(255,255,255,0.45)" }}
+                >
+                  {faq.question}
+                </span>
+                <span className="shrink-0 w-5 h-5 flex items-center justify-center text-white/48 group-hover:text-white/65 transition-colors">
+                  {openIndex === index
+                    ? <Minus className="w-3.5 h-3.5" strokeWidth={1} />
+                    : <Plus className="w-3.5 h-3.5" strokeWidth={1} />
+                  }
+                </span>
               </button>
+
               <motion.div
                 initial={false}
                 animate={{
                   height: openIndex === index ? "auto" : 0,
                   opacity: openIndex === index ? 1 : 0,
                 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.35, ease: "easeInOut" }}
                 className="overflow-hidden"
               >
-                <p className="px-6 pb-6 text-muted-foreground leading-relaxed">{faq.answer}</p>
+                <p className="pb-7 text-sm font-light text-white/52 leading-[2] max-w-2xl">
+                  {faq.answer}
+                </p>
               </motion.div>
             </motion.div>
           ))}

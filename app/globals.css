@@ -1,93 +1,144 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* ── Rotating border — Paraguay flag ── */
+@property --py-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin-py {
+  to { --py-angle: 360deg; }
+}
+
+@keyframes shimmer-bg {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Wrapper: the spinning gradient ring */
+.btn-py-ring {
+  position: relative;
+  display: inline-flex;
+  border-radius: 9999px;
+  padding: 1.5px;
+  z-index: 0;
+  background: conic-gradient(
+    from var(--py-angle),
+    #D52B1E 0deg,
+    rgba(255,255,255,0.7) 90deg,
+    #0038A8 180deg,
+    rgba(255,255,255,0.7) 270deg,
+    #D52B1E 360deg
+  );
+  animation: spin-py 4s linear infinite;
+}
+
+/* Inner: the black button */
+.btn-py-inner {
+  position: relative;
+  z-index: 1;
+  border-radius: 9999px;
+  background: #000;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 2.25rem;
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.75);
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+
+.btn-py-inner:hover {
+  color: rgba(255,255,255,0.95);
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.98 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  /* Primary color changed to titanium gray instead of blue */
-  --primary: oklch(0.18 0 0);
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.96 0 0);
-  --secondary-foreground: oklch(0.18 0 0);
-  --muted: oklch(0.92 0 0);
-  --muted-foreground: oklch(0.45 0 0);
-  --accent: oklch(0.15 0 0);
-  --accent-foreground: oklch(0.98 0 0);
+  --background: #000000;
+  --foreground: #f5f5f5;
+  --card: #0a0a0a;
+  --card-foreground: #f5f5f5;
+  --popover: #0a0a0a;
+  --popover-foreground: #f5f5f5;
+  --primary: #f5f5f5;
+  --primary-foreground: #000000;
+  --secondary: #111111;
+  --secondary-foreground: #f5f5f5;
+  --muted: #171717;
+  --muted-foreground: rgba(255,255,255,0.35);
+  --accent: #111111;
+  --accent-foreground: #f5f5f5;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.88 0 0);
-  --input: oklch(0.92 0 0);
-  /* Ring color changed to graphite */
-  --ring: oklch(0.18 0 0);
-  /* Custom colors for BBLaw - titanium gray and graphite */
-  --titanium: oklch(0.45 0 0);
-  --graphite: oklch(0.18 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --border: rgba(255,255,255,0.07);
+  --input: #111111;
+  --ring: rgba(255,255,255,0.2);
+
+  /* BBLaw — Paraguay colors */
+  --py-red: #D52B1E;
+  --py-blue: #0038A8;
+  --py-white: rgba(255,255,255,0.6);
+
+  --titanium: rgba(255,255,255,0.45);
+  --graphite: #111111;
+
+  --radius: 0.5rem;
+
+  --sidebar: #0a0a0a;
+  --sidebar-foreground: #f5f5f5;
+  --sidebar-primary: #f5f5f5;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #111111;
+  --sidebar-accent-foreground: #f5f5f5;
+  --sidebar-border: rgba(255,255,255,0.07);
+  --sidebar-ring: rgba(255,255,255,0.2);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  /* Primary color in dark mode changed to light gray */
-  --primary: oklch(0.65 0 0);
-  --primary-foreground: oklch(0.145 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --background: #000000;
+  --foreground: #f5f5f5;
+  --card: #0a0a0a;
+  --card-foreground: #f5f5f5;
+  --popover: #0a0a0a;
+  --popover-foreground: #f5f5f5;
+  --primary: #f5f5f5;
+  --primary-foreground: #000000;
+  --secondary: #111111;
+  --secondary-foreground: #f5f5f5;
+  --muted: #171717;
+  --muted-foreground: rgba(255,255,255,0.35);
+  --accent: #111111;
+  --accent-foreground: #f5f5f5;
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  /* Ring color in dark mode changed to light gray */
-  --ring: oklch(0.65 0 0);
-  --titanium: oklch(0.65 0 0);
-  --graphite: oklch(0.18 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  --border: rgba(255,255,255,0.07);
+  --input: #111111;
+  --ring: rgba(255,255,255,0.2);
+  --titanium: rgba(255,255,255,0.45);
+  --graphite: #111111;
+
+  --sidebar: #0a0a0a;
+  --sidebar-foreground: #f5f5f5;
+  --sidebar-primary: #f5f5f5;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #111111;
+  --sidebar-accent-foreground: #f5f5f5;
+  --sidebar-border: rgba(255,255,255,0.07);
+  --sidebar-ring: rgba(255,255,255,0.2);
 }
 
 @theme inline {
-  /* Updated fonts for BBLaw - DM Sans + Source Serif 4 */
-  --font-sans: "DM Sans", "DM Sans Fallback", system-ui, sans-serif;
-  --font-serif: "Source Serif 4", "Source Serif 4 Fallback", Georgia, serif;
-  --font-mono: "Geist Mono", "Geist Mono Fallback", monospace;
+  /* Fontes leves, finas — estilo Kast */
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-serif: "DM Sans", system-ui, sans-serif;
+  --font-mono: "Geist Mono", monospace;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -107,14 +158,8 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  /* Added custom BBLaw colors to theme */
   --color-titanium: var(--titanium);
   --color-graphite: var(--graphite);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -131,13 +176,99 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    border-color: var(--color-border);
+    outline-color: color-mix(in oklch, var(--color-ring) 50%, transparent);
   }
-  body {
-    @apply bg-background text-foreground;
-  }
-  /* Added smooth scroll behavior */
+
   html {
     scroll-behavior: smooth;
   }
+
+  body {
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    /* Gradiente bandeira do Paraguai — flui por toda a página */
+    background: linear-gradient(
+      to bottom,
+      #3a0503 0%,
+      #0e0101 7%,
+      #000000 18%,
+      #000000 50%,
+      #000000 82%,
+      #010614 93%,
+      #001050 100%
+    );
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  /* Ambient glow overlay — vermelho no topo, azul no rodapé */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 90% 40% at 50% 0%, rgba(213,43,30,0.14) 0%, transparent 60%),
+      radial-gradient(ellipse 90% 40% at 50% 100%, rgba(0,56,168,0.16) 0%, transparent 60%);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 200;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: rgba(213, 43, 30, 0.2);
+    color: #fff;
+  }
 }
+
+/* ── Efeito de título global — estilo Kast ── */
+
+/* Headline inteira com gradiente vertical branco → cinza */
+.heading-kast {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(200, 200, 200, 0.55) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 100;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+}
+
+/* Palavra em destaque — slightly muted italic dentro do heading */
+.heading-kast-muted {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(160, 160, 160, 0.3) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 100;
+  font-style: italic;
+  letter-spacing: -0.03em;
+}
+
+/* Legacy aliases */
+.title-solid { color: rgba(255,255,255,0.88); font-weight:100; letter-spacing:-0.03em; line-height:1.05; }
+.title-fade  { background: linear-gradient(180deg,rgba(255,255,255,0.9) 0%,rgba(190,190,190,0.5) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:100; letter-spacing:-0.03em; line-height:1.05; }
+.title-ghost { color: rgba(255,255,255,0.2); font-weight:100; font-style:italic; letter-spacing:-0.03em; line-height:1.05; }
+
+/* Eyebrow label */
+.eyebrow {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.48);
+}
+
