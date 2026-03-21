@@ -6,7 +6,7 @@ import { useRef, useState } from "react"
 import { ArrowRight, MessageCircle } from "lucide-react"
 
 const WA_LINK =
-  "https://wa.me/5511982712025?text=Gostaria%20de%20agendar%20uma%20consultoria%20para%20tirar%20minha%20cidadania%20do%20paraguai."
+  "https://wa.me/5521979901686?text=Gostaria%20de%20agendar%20uma%20consultoria%20para%20tirar%20minha%20cidadania%20do%20paraguai."
 
 export function ContactSection() {
   const ref = useRef(null)
@@ -24,7 +24,7 @@ export function ContactSection() {
     // Redireciona para WhatsApp com os dados preenchidos
     const msg = `Olá! Me chamo ${formData.name}. ${formData.message || "Gostaria de agendar uma consultoria para tirar minha cidadania do paraguai."}`
     window.open(
-      `https://wa.me/5511982712025?text=${encodeURIComponent(msg)}`,
+      `https://wa.me/5521979901686?text=${encodeURIComponent(msg)}`,
       "_blank"
     )
     setSent(true)
@@ -77,7 +77,7 @@ export function ContactSection() {
             <div className="mt-10 pt-8 border-t border-white/6 space-y-4">
               <div>
                 <p className="eyebrow mb-1">Telefone</p>
-                <p className="text-sm font-light text-white/65">+55 11 98271-2025</p>
+                <p className="text-sm font-light text-white/65">+55 21 97990-1686</p>
               </div>
               <div>
                 <p className="eyebrow mb-1">E-mail</p>

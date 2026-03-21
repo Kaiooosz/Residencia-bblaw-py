@@ -4,7 +4,7 @@ import { Instagram, Linkedin, Youtube, MessageCircle, ArrowUpRight } from "lucid
 import Link from "next/link"
 
 const WA_LINK =
-  "https://wa.me/5511982712025?text=Gostaria%20de%20agendar%20uma%20consultoria%20para%20tirar%20minha%20cidadania%20do%20paraguai."
+  "https://wa.me/5521979901686?text=Gostaria%20de%20agendar%20uma%20consultoria%20para%20tirar%20minha%20cidadania%20do%20paraguai."
 
 const quickLinks = [
   { label: "Início", href: "#hero" },
@@ -137,7 +137,7 @@ export function Footer() {
             <p className="eyebrow mb-5">Contato</p>
             <div className="space-y-4">
               {[
-                { label: "WhatsApp", value: "+55 11 98271-2025", href: WA_LINK },
+                { label: "WhatsApp", value: "+55 21 97990-1686", href: WA_LINK },
                 { label: "E-mail", value: "contato@bezerraborges.com.br", href: "mailto:contato@bezerraborges.com.br" },
                 { label: "Horário", value: "Seg–Sex, 9h às 18h", href: null },
               ].map(({ label, value, href }) => (

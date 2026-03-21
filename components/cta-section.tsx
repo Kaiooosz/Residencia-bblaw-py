@@ -5,7 +5,7 @@ import { useRef } from "react"
 import { ArrowRight, Phone, Mail, MessageCircle } from "lucide-react"
 
 const WA_LINK =
-  "https://wa.me/5511982712025?text=Gostaria%20de%20agendar%20uma%20consultoria%20para%20tirar%20minha%20cidadania%20do%20paraguai."
+  "https://wa.me/5521979901686?text=Gostaria%20de%20agendar%20uma%20consultoria%20para%20tirar%20minha%20cidadania%20do%20paraguai."
 
 export function CTASection() {
   const ref = useRef(null)
@@ -85,9 +85,9 @@ export function CTASection() {
               <span className="eyebrow block mb-8">Entre em contato</span>
 
               {[
-                { icon: Phone, label: "Telefone", value: "+55 11 98271-2025", href: "tel:+5511982712025" },
+                { icon: Phone, label: "Telefone", value: "+55 21 97990-1686", href: "tel:+5521979901686" },
                 { icon: Mail, label: "E-mail", value: "contato@bezerraborges.com.br", href: "mailto:contato@bezerraborges.com.br" },
-                { icon: MessageCircle, label: "WhatsApp", value: "+55 11 98271-2025", href: WA_LINK },
+                { icon: MessageCircle, label: "WhatsApp", value: "+55 21 97990-1686", href: WA_LINK },
               ].map(({ icon: Icon, label, value, href }) => (
                 <a
                   key={label}

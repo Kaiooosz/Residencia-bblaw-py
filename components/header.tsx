@@ -14,7 +14,7 @@ const navItems = [
 ]
 
 const WA_LINK =
-  "https://wa.me/5511982712025?text=Gostaria%20de%20agendar%20uma%20consultoria%20para%20tirar%20minha%20cidadania%20do%20paraguai."
+  "https://wa.me/5521979901686?text=Gostaria%20de%20agendar%20uma%20consultoria%20para%20tirar%20minha%20cidadania%20do%20paraguai."
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
