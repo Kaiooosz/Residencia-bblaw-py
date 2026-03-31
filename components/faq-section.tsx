@@ -6,19 +6,29 @@ import { Plus, Minus } from "lucide-react"
 
 const faqs = [
   {
-    question: "Quanto tempo leva o processo de cidadania paraguaia?",
+    question: "O que é o programa de residência paraguaia?",
     answer:
-      "O tempo varia de acordo com o cenário de cada cliente, mas o processo pode iniciar rapidamente após a avaliação inicial. A residência pode ser obtida em poucas semanas, e a cidadania permanente após o cumprimento dos requisitos legais de residência.",
+      "O programa de residência paraguaia permite que brasileiros vivam legalmente no Paraguai, com acesso a serviços bancários, abertura de empresa e direitos de residente permanente. A BBLaw oferece assessoria completa para todo o processo, desde a análise de viabilidade até a obtenção do documento de residência.",
+  },
+  {
+    question: "Quanto tempo leva para obter a residência?",
+    answer:
+      "O prazo varia conforme o caso, mas em geral o processo de residência pode ser concluído em poucas semanas após a entrega completa da documentação. Nossa equipe otimiza cada etapa para garantir o menor tempo possível.",
   },
   {
     question: "Preciso viajar ao Paraguai?",
     answer:
-      "Sim, a viagem é necessária para protocolar documentos pessoalmente junto aos órgãos competentes. A BBLaw organiza toda a logística da sua viagem, acompanha você presencialmente e cuida de todos os detalhes para que sua experiência seja tranquila e eficiente.",
+      "Sim, a presença física é necessária para protocolar documentos junto aos órgãos competentes. A BBLaw organiza toda a logística da sua viagem, acompanha você presencialmente e cuida de todos os detalhes para que a experiência seja tranquila e eficiente.",
+  },
+  {
+    question: "Quais documentos são necessários?",
+    answer:
+      "Os documentos básicos incluem certidão de nascimento, antecedentes criminais, comprovante de renda e passaporte válido, entre outros. Após a consulta inicial, enviamos um checklist completo e personalizado para o seu caso.",
   },
   {
     question: "Os custos variam de acordo com cada caso?",
     answer:
-      "Sim, criamos um pacote sob medida para cada cliente, considerando suas necessidades específicas, tipo de processo e documentação necessária. Após a consulta inicial, apresentamos um orçamento transparente e detalhado.",
+      "Sim, criamos um pacote sob medida para cada cliente, considerando suas necessidades específicas e documentação necessária. Após a consulta inicial, apresentamos um orçamento transparente e detalhado.",
   },
   {
     question: "Preciso saber espanhol?",
@@ -26,19 +36,9 @@ const faqs = [
       "Não é necessário. Nossa equipe é bilíngue e acompanha você em todos os momentos, desde a preparação dos documentos até os protocolos presenciais no Paraguai. Você terá suporte completo em português.",
   },
   {
-    question: "Qual a diferença entre residência e cidadania?",
+    question: "Residência no Paraguai dá direito a abrir conta bancária e empresa?",
     answer:
-      "A residência permite que você viva legalmente no Paraguai, trabalhe e tenha acesso a serviços. Já a cidadania paraguaia oferece direitos completos como cidadão, incluindo passaporte paraguaio e direito a voto. O processo geralmente começa com a residência e evolui para a cidadania após o período legal.",
-  },
-  {
-    question: "Posso fazer o processo sem ir ao Paraguai?",
-    answer:
-      "Infelizmente não. A legislação paraguaia exige presença física para alguns procedimentos essenciais. No entanto, minimizamos a necessidade de viagens e otimizamos sua estadia para que tudo seja resolvido no menor tempo possível.",
-  },
-  {
-    question: "Quais documentos são necessários?",
-    answer:
-      "Os documentos básicos incluem certidão de nascimento, antecedentes criminais, comprovante de renda, entre outros. Após a consulta de viabilidade, enviamos um checklist completo e personalizado com todos os documentos necessários para o seu caso específico.",
+      "Sim. Com a residência paraguaia você pode abrir conta em bancos locais, constituir empresas com segurança jurídica e acessar os benefícios fiscais do país. Nossa assessoria cobre todos esses serviços complementares.",
   },
 ]
 
@@ -68,7 +68,7 @@ export function FAQSection() {
             <em style={{ fontStyle: "italic" }}>Frequentes</em>
           </h2>
           <p className="mt-6 text-sm font-light text-white/70 leading-relaxed">
-            Tire suas principais dúvidas sobre o processo de cidadania
+            Tire suas principais dúvidas sobre o programa de residência paraguaia
           </p>
         </motion.div>
 

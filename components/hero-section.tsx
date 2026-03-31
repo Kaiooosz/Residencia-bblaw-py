@@ -97,9 +97,9 @@ export function HeroSection() {
             className="heading-kast text-balance"
             style={{ fontSize: "clamp(3.2rem, 7.5vw, 6.5rem)" }}
           >
-            Conquiste sua
+            Obtenha sua
             <br />
-            Cidadania Paraguaia
+            Residência Paraguaia
             <br />
             com{" "}
             <em style={{ fontStyle: "italic" }}>Segurança</em>
@@ -112,8 +112,8 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.22 }}
             className="mt-10 text-sm font-light text-white/70 max-w-md mx-auto leading-[2] tracking-wide"
           >
-            Oferecemos assessoria completa para brasileiros que desejam resolver documentos,
-            abrir empresas, validar diplomas ou conquistar a cidadania paraguaia.
+            Assessoria completa para brasileiros que desejam obter a residência permanente
+            no Paraguai com segurança jurídica e acompanhamento em todas as etapas.
           </motion.p>
 
           {/* CTA Buttons */}

@@ -11,7 +11,7 @@ const navItems = [
   { label: "Serviços", href: "#solucao" },
   { label: "Como Funciona", href: "#processo" },
   { label: "FAQ", href: "#faq" },
-  { label: "Guia Cédula", href: "/guia-cedula", isPage: true },
+  { label: "Residência", href: "#solucao" },
 ]
 
 const WA_LINK =

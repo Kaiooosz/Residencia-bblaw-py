@@ -8,15 +8,15 @@ const services = [
   {
     icon: Flag,
     tag: "01",
-    title: "Cidadania Paraguaia",
+    title: "Residência Paraguaia",
     description:
-      "Assessoria completa para obtenção da cidadania paraguaia com acompanhamento em todas as etapas.",
+      "Programa completo para obtenção da residência permanente no Paraguai com acompanhamento em todas as etapas.",
     items: [
+      "Análise de viabilidade do caso",
       "Preparação e conferência de documentos",
       "Orientação sobre requisitos legais",
       "Protocolos presenciais e administrativos",
-      "Auxílio com documentos brasileiros",
-      "Consultoria personalizada",
+      "Acompanhamento até a residência permanente",
     ],
     accentColor: "#D52B1E",
     gradientFrom: "from-[#D52B1E]/8",
@@ -85,8 +85,8 @@ export function SolutionSection() {
             className="heading-kast mt-5 text-balance"
             style={{ fontSize: "clamp(2rem,4vw,3.5rem)" }}
           >
-            Soluções completas para{" "}
-            <em style={{ fontStyle: "italic" }}>brasileiros no Paraguai</em>
+            Programa de residência e{" "}
+            <em style={{ fontStyle: "italic" }}>serviços completos no Paraguai</em>
           </h2>
         </motion.div>
 
