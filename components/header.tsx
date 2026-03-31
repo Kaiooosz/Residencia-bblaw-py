@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import Link from "next/link"
 
-const navItems = [
+const navItems: { label: string; href: string; isPage?: boolean }[] = [
   { label: "Início", href: "#hero" },
   { label: "Por que Paraguai", href: "#problema" },
   { label: "Serviços", href: "#solucao" },
