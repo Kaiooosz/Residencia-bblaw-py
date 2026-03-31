@@ -11,6 +11,7 @@ const navItems = [
   { label: "Serviços", href: "#solucao" },
   { label: "Como Funciona", href: "#processo" },
   { label: "FAQ", href: "#faq" },
+  { label: "Guia Cédula", href: "/guia-cedula", isPage: true },
 ]
 
 const WA_LINK =
@@ -50,15 +51,25 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-12">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-[10px] font-light tracking-[0.18em] text-white/55 hover:text-white/65 transition-colors duration-300 uppercase"
-              >
-                {item.label}
-              </a>
-            ))}
+            {navItems.map((item) =>
+              item.isPage ? (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="text-[10px] font-light tracking-[0.18em] text-[#D52B1E]/60 hover:text-[#D52B1E]/85 transition-colors duration-300 uppercase"
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="text-[10px] font-light tracking-[0.18em] text-white/55 hover:text-white/65 transition-colors duration-300 uppercase"
+                >
+                  {item.label}
+                </a>
+              )
+            )}
           </nav>
 
           {/* CTA */}
@@ -97,16 +108,27 @@ export function Header() {
             className="lg:hidden bg-black/95 border-t border-white/5"
           >
             <nav className="flex flex-col px-6 py-8 gap-6">
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-sm font-light text-white/40 hover:text-white/65 transition-colors tracking-wide"
-                >
-                  {item.label}
-                </a>
-              ))}
+              {navItems.map((item) =>
+                item.isPage ? (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-sm font-light text-[#D52B1E]/55 hover:text-[#D52B1E]/80 transition-colors tracking-wide"
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-sm font-light text-white/40 hover:text-white/65 transition-colors tracking-wide"
+                  >
+                    {item.label}
+                  </a>
+                )
+              )}
               <a
                 href={WA_LINK}
                 target="_blank"
