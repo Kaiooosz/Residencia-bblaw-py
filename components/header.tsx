@@ -12,6 +12,7 @@ const navItems: { label: string; href: string; isPage?: boolean }[] = [
   { label: "Como Funciona", href: "#processo" },
   { label: "FAQ", href: "#faq" },
   { label: "Residência", href: "#solucao" },
+  { label: "Guia Cédula", href: "/guia-cedula", isPage: true },
 ]
 
 const WA_LINK =
