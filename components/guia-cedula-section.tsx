@@ -315,7 +315,7 @@ function StepCard({
         {description}
       </p>
       {detail && (
-        <p className="mt-2 text-[11px] font-light leading-relaxed" style={{ color: color + "80" }}>
+        <p className="mt-2 text-[11px] font-light leading-relaxed text-white/50">
           {detail}
         </p>
       )}
@@ -502,71 +502,6 @@ const docsBrasileiros: DocCard[] = [
   },
 ]
 
-const docsParaguaios: DocCard[] = [
-  {
-    name: "Certificado de Antecedentes INTERPOL Paraguai",
-    where: "Departamento de INTERPOL — Assunção (Ministerio del Interior)",
-    price: "G$ 50.000 a G$ 100.000 (~US$ 7–14)",
-    time: "1 a 3 dias úteis",
-    validity: "90 dias",
-    color: "#D52B1E",
-    tip: "Presença física obrigatória. Leve passaporte ou RG original.",
-  },
-  {
-    name: "Antecedentes — Polícia Nacional do Paraguai",
-    where: "Departamento de Identificaciones — Assunção",
-    price: "G$ 30.000 a G$ 60.000 (~US$ 4–8)",
-    time: "1 a 2 dias úteis",
-    validity: "90 dias",
-    color: "#0038A8",
-    tip: "Necessário apresentar número de cédula paraguaia temporária ou passaporte.",
-  },
-  {
-    name: "Certificado Médico (saúde física e mental)",
-    where: "Clínicas credenciadas pelo Ministerio de Salud Pública do Paraguai",
-    price: "G$ 150.000 a G$ 350.000 (~US$ 20–50)",
-    time: "No dia (consulta com hora marcada)",
-    validity: "90 dias",
-    color: "rgba(255,255,255,0.4)",
-    tip: "Inclui exame clínico geral, raio-X de tórax e declaração de não ter doenças infectocontagiosas.",
-  },
-  {
-    name: "Certificado de Vida e Residência",
-    where: "Comisaría (delegacia) do bairro onde está hospedado",
-    price: "G$ 20.000 a G$ 50.000 (~US$ 3–7)",
-    time: "No dia ou 1 dia útil",
-    validity: "90 dias",
-    color: "#D52B1E",
-    tip: "Leve comprovante do local onde está hospedado (hotel, contrato de aluguel ou declaração de anfitrião).",
-  },
-  {
-    name: "Certificado Migratório (DGMM)",
-    where: "Dirección General de Migraciones — Assunção",
-    price: "US$ 150 a US$ 350 (taxa oficial + autenticações)",
-    time: "2 a 6 semanas",
-    validity: "Permanente (enquanto residência vigente)",
-    color: "#0038A8",
-    tip: "Este é o documento central. Após aprovação, você recebe o carnet de radicación.",
-  },
-  {
-    name: "Carnet de Radicação (cédula de residente)",
-    where: "DGMM — emitido após aprovação da residência",
-    price: "Incluído no processo migratório",
-    time: "2 a 4 semanas após aprovação",
-    validity: "2 anos (temporária) / Permanente",
-    color: "rgba(255,255,255,0.4)",
-    tip: "Com o carnet em mãos, você pode solicitar a cédula de identidade na DGREC.",
-  },
-  {
-    name: "Cédula de Identidade Paraguaia (DGREC)",
-    where: "DGREC — Dirección General del Registro Civil y Estadísticas",
-    price: "G$ 30.000 a G$ 60.000 (~US$ 4–8)",
-    time: "5 a 15 dias úteis",
-    validity: "5 anos (renovável)",
-    color: "#D52B1E",
-    tip: "Etapa final. Apresentar carnet de radicação, passaporte, certidão apostilada e fotos.",
-  },
-]
 
 const processoSteps = [
   {
@@ -815,7 +750,7 @@ export function GuiaCedulaSection() {
         </div>
 
         {/* Key info grid */}
-        <div className="mt-20 grid md:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden">
+        <div className="mt-20 grid md:grid-cols-2 gap-px bg-white/5 rounded-2xl overflow-hidden">
           {[
             {
               icon: Clock,
@@ -823,13 +758,6 @@ export function GuiaCedulaSection() {
               label: "Tempo total estimado",
               value: "2 a 4 meses",
               detail: "Com assessoria jurídica especializada e documentos corretos na primeira tentativa.",
-            },
-            {
-              icon: DollarSign,
-              color: "rgba(255,255,255,0.5)",
-              label: "Custo médio total",
-              value: "R$ 4.000–10.000",
-              detail: "Inclui documentos, apostilas, taxas paraguaias e honorários advocatícios.",
             },
             {
               icon: AlertTriangle,
@@ -843,7 +771,7 @@ export function GuiaCedulaSection() {
               <Icon className="w-5 h-5 mb-5 transition-all duration-300" strokeWidth={1} style={{ color, opacity: 0.65 }} />
               <p className="text-[10px] font-light tracking-[0.2em] uppercase text-white/30 mb-2">{label}</p>
               <p className="text-2xl font-light text-white/80 mb-2 group-hover:text-white/95 transition-colors duration-300">{value}</p>
-              <p className="text-xs font-light text-white/45 leading-relaxed">{detail}</p>
+              <p className="text-xs font-light text-white/60 leading-relaxed">{detail}</p>
             </div>
           ))}
         </div>
@@ -1189,33 +1117,11 @@ export function GuiaCedulaSection() {
         </div>
       </SectionWrapper>
 
-      {/* ── SECTION 6: DOCUMENTOS PARAGUAIOS ─────────────────────────────── */}
-      <SectionWrapper id="docs-paraguaios" className="border-t border-white/5">
-        <SectionHeader
-          eyebrow="06 — Documentos Paraguaios"
-          title="Documentos emitidos"
-          italic="no Paraguai"
-          subtitle="Estes documentos são obtidos após sua chegada ao país. Vários precisam ser emitidos pessoalmente — não é possível fazer à distância."
-        />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden">
-          {docsParaguaios.map((doc, i) => (
-            <DocumentCard key={i} doc={doc} index={i} />
-          ))}
-        </div>
-
-        <BBLawCTA
-          title="Nossa equipe em Assunção acompanha você em cada órgão"
-          body="INTERPOL, Polícia Nacional, clínica médica, comisaría, Migraciones e DGREC — conhecemos os procedimentos, os horários e os atalhos legais que economizam dias de espera."
-          cta="Quero assessoria no Paraguai"
-          variant="blue"
-        />
-      </SectionWrapper>
-
-      {/* ── SECTION 7: RESIDÊNCIA ─────────────────────────────────────────── */}
+      {/* ── SECTION 6: RESIDÊNCIA ─────────────────────────────────────────── */}
       <SectionWrapper id="residencia" className="border-t border-white/5">
         <SectionHeader
-          eyebrow="07 — Residência"
+          eyebrow="06 — Residência"
           title="Processo de residência"
           italic="paraguaia"
           subtitle="A residência é o pré-requisito para a cédula. Há dois tipos: temporária e permanente. A maioria dos brasileiros começa com a temporária e converte depois."
@@ -1291,10 +1197,10 @@ export function GuiaCedulaSection() {
         </div>
       </SectionWrapper>
 
-      {/* ── SECTION 8: CHECKLIST FINAL ────────────────────────────────────── */}
+      {/* ── SECTION 7: CHECKLIST FINAL ────────────────────────────────────── */}
       <SectionWrapper id="checklist" className="border-t border-white/5">
         <SectionHeader
-          eyebrow="08 — Checklist"
+          eyebrow="07 — Checklist"
           title="Checklist"
           italic="final"
           subtitle="Use esta lista antes de viajar e durante o processo no Paraguai. Um item faltando pode atrasar semanas."
@@ -1345,10 +1251,10 @@ export function GuiaCedulaSection() {
         </div>
       </SectionWrapper>
 
-      {/* ── SECTION 9: ERROS FATAIS ───────────────────────────────────────── */}
+      {/* ── SECTION 8: ERROS FATAIS ───────────────────────────────────────── */}
       <SectionWrapper id="erros" className="border-t border-white/5">
         <SectionHeader
-          eyebrow="09 — Cuidados"
+          eyebrow="08 — Cuidados"
           title="Erros que fazem"
           italic="negar a residência"
           subtitle="Estes são os motivos mais comuns de indeferimento e atraso no processo. Conhecê-los antecipadamente evita retrabalho e prejuízo."
