@@ -8,7 +8,7 @@ const faqs = [
   {
     question: "O que é o programa de residência paraguaia?",
     answer:
-      "O programa de residência paraguaia permite que brasileiros vivam legalmente no Paraguai, com acesso a serviços bancários, abertura de empresa e direitos de residente permanente. A BBLaw oferece assessoria completa para todo o processo, desde a análise de viabilidade até a obtenção do documento de residência.",
+      "O programa de residência paraguaia permite que brasileiros vivam legalmente no Paraguai, com acesso a serviços bancários, abertura de empresa e direitos de residente permanente. A Bezerra Borges oferece assessoria completa para todo o processo, desde a análise de viabilidade até a obtenção do documento de residência.",
   },
   {
     question: "Quanto tempo leva para obter a residência?",
@@ -18,7 +18,7 @@ const faqs = [
   {
     question: "Preciso viajar ao Paraguai?",
     answer:
-      "Sim, a presença física é necessária para protocolar documentos junto aos órgãos competentes. A BBLaw organiza toda a logística da sua viagem, acompanha você presencialmente e cuida de todos os detalhes para que a experiência seja tranquila e eficiente.",
+      "Sim, a presença física é necessária para protocolar documentos junto aos órgãos competentes. A Bezerra Borges organiza toda a logística da sua viagem, acompanha você presencialmente e cuida de todos os detalhes para que a experiência seja tranquila e eficiente.",
   },
   {
     question: "Quais documentos são necessários?",

@@ -67,7 +67,7 @@ export function HeroSection() {
         className="absolute z-20"
         style={{ top: "6rem" }}
       >
-        <img src="/LogoBranco.svg" alt="BBLaw" className="h-9 w-auto object-contain opacity-80" />
+        <img src="/LogoBranco.svg" alt="Bezerra Borges" className="h-9 w-auto object-contain opacity-80" />
       </motion.div>
 
       {/* ── Main content ── */}

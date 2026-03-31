@@ -9,7 +9,7 @@ const testimonials = [
   {
     id: 1,
     content:
-      "A BBLaw tornou todo o processo muito mais simples do que eu imaginava. Desde o primeiro contato até a emissão do meu cartão de residência, tive acompanhamento completo. Recomendo a todos!",
+      "A Bezerra Borges tornou todo o processo muito mais simples do que eu imaginava. Desde o primeiro contato até a emissão do meu cartão de residência, tive acompanhamento completo. Recomendo a todos!",
     author: "Carlos Eduardo M.",
     role: "Empresário",
     location: "São Paulo, SP",
@@ -18,7 +18,7 @@ const testimonials = [
   {
     id: 2,
     content:
-      "Eu tinha muito receio de enfrentar a burocracia sozinha, mas com a equipe da BBLaw foi tudo tranquilo. Eles cuidaram de cada detalhe e me mantiveram informada em todas as etapas.",
+      "Eu tinha muito receio de enfrentar a burocracia sozinha, mas com a equipe da Bezerra Borges foi tudo tranquilo. Eles cuidaram de cada detalhe e me mantiveram informada em todas as etapas.",
     author: "Marina Costa S.",
     role: "Investidora",
     location: "Rio de Janeiro, RJ",

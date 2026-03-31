@@ -45,7 +45,7 @@ export function Header() {
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
             <Link href="/" className="flex items-center">
-              <img src="/LogoBranco.svg" alt="BBLaw" className="h-8 w-auto object-contain opacity-80" />
+              <img src="/LogoBranco.svg" alt="Bezerra Borges" className="h-8 w-auto object-contain opacity-80" />
             </Link>
           </motion.div>
 

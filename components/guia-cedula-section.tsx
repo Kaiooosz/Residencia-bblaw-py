@@ -27,7 +27,7 @@ import {
 } from "lucide-react"
 
 const WA_LINK =
-  "https://wa.me/5521979901686?text=Ol%C3%A1%2C%20vi%20o%20guia%20da%20c%C3%A9dula%20paraguaia%20e%20quero%20iniciar%20meu%20processo%20com%20a%20BBLaw."
+  "https://wa.me/5521979901686?text=Ol%C3%A1%2C%20vi%20o%20guia%20da%20c%C3%A9dula%20paraguaia%20e%20quero%20iniciar%20meu%20processo%20com%20a%20Bezerra%20Borges."
 
 // ─── Reusable section wrapper ───────────────────────────────────────────────
 function SectionWrapper({
@@ -89,7 +89,7 @@ function SectionHeader({
   )
 }
 
-// ─── BBLaw branded CTA box ───────────────────────────────────────────────────
+// ─── Bezerra Borges branded CTA box ───────────────────────────────────────────────────
 function BBLawCTA({
   title,
   body,
@@ -122,7 +122,7 @@ function BBLawCTA({
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
             <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: dot, opacity: 0.8 }} />
-            <span className="text-[10px] font-light tracking-[0.25em] uppercase text-white/40">BBLaw</span>
+            <span className="text-[10px] font-light tracking-[0.25em] uppercase text-white/40">Bezerra Borges</span>
           </div>
           <h4 className="text-base font-light text-white/85 mb-2">{title}</h4>
           <p className="text-sm font-light text-white/52 leading-relaxed">{body}</p>
@@ -778,7 +778,7 @@ export function GuiaCedulaSection() {
 
         <BBLawCTA
           title="Deixe um especialista cuidar de todo o processo por você"
-          body="A BBLaw acompanha brasileiros em cada etapa — da organização dos documentos até a retirada da cédula em Assunção. Sem surpresas, sem retrabalho."
+          body="A Bezerra Borges acompanha brasileiros em cada etapa — da organização dos documentos até a retirada da cédula em Assunção. Sem surpresas, sem retrabalho."
           cta="Iniciar meu processo"
         />
       </SectionWrapper>
@@ -1186,7 +1186,7 @@ export function GuiaCedulaSection() {
           {[
             { label: "Depósito mínimo (Permanente)", value: "~US$ 5.000", detail: "Em banco paraguaio (Banco Nacional de Fomento ou privado). Permanece na sua conta." },
             { label: "Necessita advogado?", value: "Fortemente recomendado", detail: "Não é legalmente obrigatório, mas erros de protocolo custam meses. 90% dos casos com atraso não tiveram assessoria." },
-            { label: "Presença física no Paraguai", value: "Sim, obrigatória", detail: "Pelo menos uma viagem para protocolar pessoalmente e realizar os exames. A BBLaw otimiza sua estadia." },
+            { label: "Presença física no Paraguai", value: "Sim, obrigatória", detail: "Pelo menos uma viagem para protocolar pessoalmente e realizar os exames. A Bezerra Borges otimiza sua estadia." },
           ].map(({ label, value, detail }, i) => (
             <div key={i} className="bg-black/55 p-7 hover:bg-black/40 transition-all duration-300 group">
               <p className="text-[10px] font-light tracking-[0.15em] uppercase text-white/30 mb-2">{label}</p>
@@ -1197,10 +1197,118 @@ export function GuiaCedulaSection() {
         </div>
       </SectionWrapper>
 
-      {/* ── SECTION 7: CHECKLIST FINAL ────────────────────────────────────── */}
+      {/* ── SECTION 7: RUC ───────────────────────────────────────────────── */}
+      <SectionWrapper id="ruc" className="border-t border-white/5">
+        <SectionHeader
+          eyebrow="07 — RUC"
+          title="Número de Identificação"
+          italic="Fiscal (RUC)"
+          subtitle="Com a cédula em mãos, a pessoa pode opcionalmente obter o RUC — o número de identificação fiscal paraguaio. Ele é necessário para emitir certificado de residência fiscal e abrir contas bancárias completas."
+        />
+
+        {/* Info cards */}
+        <div className="grid md:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden mb-12">
+          {[
+            {
+              icon: Clock,
+              color: "#D52B1E",
+              label: "Quando solicitar",
+              value: "Após 5 dias da cédula",
+              detail: "Você pode dar entrada no RUC a partir de 5 dias úteis após a obtenção da cédula paraguaia.",
+            },
+            {
+              icon: FileText,
+              color: "rgba(255,255,255,0.4)",
+              label: "Prazo de emissão",
+              value: "Até 10 dias",
+              detail: "A aplicação presencial leva 3 dias úteis. O número é emitido em até 10 dias após o protocolo.",
+            },
+            {
+              icon: DollarSign,
+              color: "#0038A8",
+              label: "Custo com Bezerra Borges",
+              value: "US$ 250",
+              detail: "Inclui o processo completo de registro do RUC. Presença física em Assunção é necessária.",
+            },
+          ].map(({ icon: Icon, color, label, value, detail }, i) => (
+            <div key={i} className="bg-black/55 p-8 group hover:bg-black/40 transition-all duration-500">
+              <Icon className="w-5 h-5 mb-5 transition-all duration-300" strokeWidth={1} style={{ color, opacity: 0.65 }} />
+              <p className="text-[10px] font-light tracking-[0.2em] uppercase text-white/30 mb-2">{label}</p>
+              <p className="text-2xl font-light text-white/80 mb-2 group-hover:text-white/95 transition-colors duration-300">{value}</p>
+              <p className="text-xs font-light text-white/60 leading-relaxed">{detail}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Para que serve */}
+        <div className="grid md:grid-cols-2 gap-10 mb-12">
+          <div>
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-1 h-6 rounded-full" style={{ background: "linear-gradient(to bottom, #D52B1E, transparent)" }} />
+              <p className="text-[10px] font-light tracking-[0.25em] uppercase text-white/45">Para que serve o RUC</p>
+            </div>
+            <div className="space-y-0 rounded-xl overflow-hidden bg-white/5">
+              {[
+                { title: "Certidão de residência fiscal", desc: "Documento que comprova residência fiscal no Paraguai para uso internacional — necessário para saída definitiva do Brasil e declarações em plataformas financeiras." },
+                { title: "Contas bancárias completas (full)", desc: "Bancos paraguaios exigem RUC ativo para abertura de contas full, com acesso a transferências SWIFT e maiores limites operacionais." },
+                { title: "Corretoras e exchanges internacionais", desc: "Permite verificar conta como residente paraguaio em plataformas financeiras que restringem acesso a residentes brasileiros." },
+                { title: "Privacidade financeira", desc: "O Paraguai não é signatário do CRS (intercâmbio automático de informações bancárias), aumentando sua privacidade financeira internacional." },
+              ].map((item, i) => (
+                <div key={i} className="bg-black/55 p-6 hover:bg-black/40 transition-all duration-300 group">
+                  <div className="flex items-start gap-3">
+                    <div className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 bg-[#D52B1E]/60" />
+                    <div>
+                      <p className="text-sm font-light text-white/75 mb-1 group-hover:text-white/90 transition-colors duration-300">{item.title}</p>
+                      <p className="text-xs font-light text-white/42 leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-1 h-6 rounded-full" style={{ background: "linear-gradient(to bottom, #0038A8, transparent)" }} />
+              <p className="text-[10px] font-light tracking-[0.25em] uppercase text-white/45">Obrigações com RUC ativo</p>
+            </div>
+            <div className="space-y-0 rounded-xl overflow-hidden bg-white/5">
+              {[
+                { title: "Declarações mensais de IVA", desc: "Quem tem RUC ativo deve apresentar declarações mensais de IVA, mesmo sem renda local no Paraguai." },
+                { title: "Custo do contador (sem renda local)", desc: "Se não houver renda paraguaia, o custo com contador é de US$ 50/mês — pago a cada 12 meses (US$ 600/ano)." },
+                { title: "Certidão de residência fiscal", desc: "Para obtê-la, é necessário ter o RUC ativo. A aplicação pode ser feita presencialmente ou remotamente por US$ 350, com prazo de 15 dias úteis." },
+              ].map((item, i) => (
+                <div key={i} className="bg-black/55 p-6 hover:bg-black/40 transition-all duration-300 group">
+                  <div className="flex items-start gap-3">
+                    <div className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 bg-[#0038A8]/60" />
+                    <div>
+                      <p className="text-sm font-light text-white/75 mb-1 group-hover:text-white/90 transition-colors duration-300">{item.title}</p>
+                      <p className="text-xs font-light text-white/42 leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <AlertBox type="info" title="RUC é opcional">
+              O RUC não é exigido para manter a residência paraguaia. Ele é recomendado para quem deseja realizar a saída definitiva do
+              Brasil, acessar plataformas financeiras internacionais ou solicitar o certificado de residência fiscal.
+            </AlertBox>
+          </div>
+        </div>
+
+        <BBLawCTA
+          title="Obtenha o RUC sem burocracia"
+          body="Nossa equipe cuida de todo o processo de registro do RUC em Assunção — da entrada do pedido à emissão do número. Também indicamos contadores para manutenção mensal."
+          cta="Solicitar meu RUC"
+          variant="blue"
+        />
+      </SectionWrapper>
+
+      {/* ── SECTION 8: CHECKLIST FINAL ────────────────────────────────────── */}
       <SectionWrapper id="checklist" className="border-t border-white/5">
         <SectionHeader
-          eyebrow="07 — Checklist"
+          eyebrow="08 — Checklist"
           title="Checklist"
           italic="final"
           subtitle="Use esta lista antes de viajar e durante o processo no Paraguai. Um item faltando pode atrasar semanas."
@@ -1251,10 +1359,10 @@ export function GuiaCedulaSection() {
         </div>
       </SectionWrapper>
 
-      {/* ── SECTION 8: ERROS FATAIS ───────────────────────────────────────── */}
+      {/* ── SECTION 9: ERROS FATAIS ───────────────────────────────────────── */}
       <SectionWrapper id="erros" className="border-t border-white/5">
         <SectionHeader
-          eyebrow="08 — Cuidados"
+          eyebrow="09 — Cuidados"
           title="Erros que fazem"
           italic="negar a residência"
           subtitle="Estes são os motivos mais comuns de indeferimento e atraso no processo. Conhecê-los antecipadamente evita retrabalho e prejuízo."
@@ -1348,7 +1456,7 @@ export function GuiaCedulaSection() {
         >
           <div className="inline-flex items-center gap-4 mb-10">
             <span className="block h-px w-8" style={{ background: "linear-gradient(90deg,transparent,rgba(213,43,30,0.6))" }} />
-            <span className="eyebrow">BBLaw Assessoria Internacional</span>
+            <span className="eyebrow">Bezerra Borges Assessoria Internacional</span>
             <span className="block h-px w-8" style={{ background: "linear-gradient(90deg,rgba(0,56,168,0.6),transparent)" }} />
           </div>
 

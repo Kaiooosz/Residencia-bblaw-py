@@ -61,7 +61,7 @@ export function Footer() {
         {/* Top — Logo + tagline grande */}
         <div className="mb-20 pb-16 border-b border-white/6">
           <Link href="/" className="inline-block mb-8">
-            <img src="/LogoBranco.svg" alt="BBLaw" className="h-10 w-auto object-contain opacity-75" />
+            <img src="/LogoBranco.svg" alt="Bezerra Borges" className="h-10 w-auto object-contain opacity-75" />
           </Link>
 
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
