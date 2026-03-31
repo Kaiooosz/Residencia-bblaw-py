@@ -619,7 +619,7 @@ const apostilaSteps = [
   {
     step: "4",
     title: "Pague a taxa e aguarde",
-    desc: "Custo médio: R$ 80 a R$ 300 por documento, dependendo do cartório e do estado. Prazo: imediato a 3 dias úteis.",
+    desc: "Aguarde a devolução do documento apostilado. Prazo: imediato a 3 dias úteis.",
     color: "#D52B1E",
   },
   {
@@ -877,8 +877,8 @@ export function GuiaCedulaSection() {
                     ETAPA {s.step}
                   </span>
                 </div>
-                <h4 className="text-sm font-light text-white/75 mb-2 group-hover:text-white/95 transition-colors duration-300">{s.title}</h4>
-                <p className="text-xs font-light text-white/48 leading-relaxed">{s.desc}</p>
+                <h4 className="text-base font-normal text-white/90 mb-2 group-hover:text-white transition-colors duration-300">{s.title}</h4>
+                <p className="text-sm font-light text-white/60 leading-relaxed">{s.desc}</p>
                 <div
                   className="mt-5 h-px w-0 group-hover:w-full transition-all duration-500"
                   style={{ background: `linear-gradient(90deg, ${s.color}50, transparent)` }}
