@@ -3,7 +3,7 @@
 import type React from "react"
 import { motion, useInView } from "framer-motion"
 import { useRef, useState } from "react"
-import { ArrowRight, MessageCircle } from "lucide-react"
+import { ArrowRight, MessageCircle, Loader2, CheckCircle } from "lucide-react"
 
 const WA_LINK =
   "https://wa.me/5521979901686?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consultoria%20para%20resid%C3%AAncia%20fiscal%20no%20Paraguai."
@@ -11,27 +11,28 @@ const WA_LINK =
 export function ContactSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  })
-  const [sent, setSent] = useState(false)
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Redireciona para WhatsApp com os dados preenchidos
-    const msg = `Olá! Me chamo ${formData.name}. ${formData.message || "Gostaria de agendar uma consultoria para tirar minha cidadania do paraguai."}`
-    window.open(
-      `https://wa.me/5521979901686?text=${encodeURIComponent(msg)}`,
-      "_blank"
-    )
-    setSent(true)
-  }
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" })
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
 
   const inputClass =
     "w-full bg-transparent border-b border-white/15 py-3 text-sm font-light text-white/85 placeholder:text-white/55 focus:outline-none focus:border-white/40 transition-colors duration-300"
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setStatus("loading")
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+      if (!res.ok) throw new Error()
+      setStatus("success")
+      setFormData({ name: "", email: "", phone: "", message: "" })
+    } catch {
+      setStatus("error")
+    }
+  }
 
   return (
     <section id="contato" className="py-32 bg-transparent relative z-10" ref={ref}>
@@ -58,7 +59,6 @@ export function ContactSection() {
               uma conversa personalizada.
             </p>
 
-            {/* WhatsApp direto */}
             <div className="mt-10">
               <div className="btn-py-ring inline-flex">
                 <a
@@ -90,28 +90,36 @@ export function ContactSection() {
             </div>
           </motion.div>
 
-          {/* Right — Formulário minimalista */}
+          {/* Right — Formulário */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.15 }}
           >
-            {sent ? (
+            {status === "success" ? (
               <div className="flex flex-col items-start justify-center h-full gap-4 py-20">
-                <div className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center">
-                  <span className="text-white/55 text-lg">✓</span>
-                </div>
-                <h3 className="text-lg font-light text-white/65">Mensagem enviada!</h3>
+                <CheckCircle className="w-10 h-10 text-white/40" />
+                <h3 className="text-lg font-light text-white/65">Recebemos seu contato!</h3>
                 <p className="text-sm font-light text-white/52 leading-relaxed">
-                  Você foi redirecionado para o WhatsApp. Respondemos em até 24h.
+                  Nossa equipe entrará em contato em até 24h.
                 </p>
+                <a
+                  href={WA_LINK}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 text-sm font-light text-white/40 hover:text-white/70 transition-colors mt-2"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  Ou fale agora no WhatsApp
+                </a>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div>
-                  <label className="eyebrow block mb-2">Nome completo</label>
+                  <label className="eyebrow block mb-2">Nome completo *</label>
                   <input
                     type="text"
+                    name="name"
                     placeholder="Seu nome"
                     className={inputClass}
                     value={formData.name}
@@ -122,9 +130,10 @@ export function ContactSection() {
 
                 <div className="grid sm:grid-cols-2 gap-8">
                   <div>
-                    <label className="eyebrow block mb-2">E-mail</label>
+                    <label className="eyebrow block mb-2">E-mail *</label>
                     <input
                       type="email"
+                      name="email"
                       placeholder="seu@email.com"
                       className={inputClass}
                       value={formData.email}
@@ -133,13 +142,15 @@ export function ContactSection() {
                     />
                   </div>
                   <div>
-                    <label className="eyebrow block mb-2">Telefone</label>
+                    <label className="eyebrow block mb-2">Telefone *</label>
                     <input
                       type="tel"
+                      name="phone"
                       placeholder="+55 11 99999-9999"
                       className={inputClass}
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      required
                     />
                   </div>
                 </div>
@@ -148,6 +159,7 @@ export function ContactSection() {
                   <label className="eyebrow block mb-2">Mensagem (opcional)</label>
                   <textarea
                     rows={4}
+                    name="message"
                     placeholder="Conte brevemente sobre seu objetivo..."
                     className={`${inputClass} resize-none`}
                     value={formData.message}
@@ -155,21 +167,35 @@ export function ContactSection() {
                   />
                 </div>
 
-                <div className="pt-2">
+                {status === "error" && (
+                  <p className="text-xs text-red-400/70 font-light">
+                    Erro ao enviar. Tente via WhatsApp.
+                  </p>
+                )}
+
+                <div className="pt-2 space-y-3">
                   <button
                     type="submit"
-                    className="w-full border border-white/10 text-white/65 text-sm font-light tracking-wide py-4 rounded-full hover:border-white/25 hover:text-white/70 transition-all duration-300 flex items-center justify-center gap-3"
+                    disabled={status === "loading"}
+                    className="w-full border border-white/10 text-white/65 text-sm font-light tracking-wide py-4 rounded-full hover:border-white/25 hover:text-white/70 transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50"
                   >
-                    Enviar via WhatsApp
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    {status === "loading" ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <>
+                        Enviar Mensagem
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </>
+                    )}
                   </button>
-                  <p className="text-center text-[10px] text-white/18 mt-4 tracking-wide">
-                    Ao enviar, você será redirecionado ao WhatsApp
+                  <p className="text-center text-[10px] text-white/18 tracking-wide">
+                    Ao enviar, você concorda com nossa política de privacidade (LGPD)
                   </p>
                 </div>
               </form>
             )}
           </motion.div>
+
         </div>
       </div>
     </section>
